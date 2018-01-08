@@ -1,0 +1,65 @@
+﻿
+thead tr th:nth-child(1) {
+    border-radius: 0.6em 0 0 0.6em;
+    background: #181818;
+}
+
+thead tr th:nth-child(2) {
+    border-radius: 0 0 0 0;
+    background: #181818;
+    
+}
+thead tr th:nth-child(3) {
+    border-radius: 0 0 0 0;
+    background: #181818;
+}
+thead tr th:nth-child(4) {
+    border-radius: 0 0 0 0;
+    background: #181818;
+    color: red;
+}
+thead tr th:nth-child(5) {
+    border-radius: 0 0 0 0;
+    background: #181818;
+    color: red;
+}
+thead tr th:nth-child(6) {
+    border-radius: 0 0.6em 0.6em 0;
+    background: #181818;
+    color: red;
+}
+
+tbody td:nth-child(1) /* This is now the middle element out of three */ {
+    border-radius: 0.6em 0 0 0.6em;
+    background: #181818;
+    color: white;
+}
+
+tbody td:nth-child(2) /* This is now the middle element out of three */ {
+    border-radius: 0 0 0 0;
+    background: #181818;
+    color: white;
+}
+
+tbody td:nth-child(3) /* This is now the middle element out of three */ {
+    border-radius: 0 0 0 0;
+    background: #181818;
+    color: white;
+}
+tbody td:nth-child(4) /* This is now the middle element out of three */ {
+    border-radius: 0 0 0 0;
+    background: #181818;
+    color: white;
+}
+tbody td:nth-child(5) /* This is now the middle element out of three */ {
+    border-radius: 0 0 0 0;
+    background: #181818;
+    color: white;
+}
+tbody td:nth-child(6) /* This is now the middle element out of three */ {
+    border-radius: 0 0.6em 0.6em 0;
+    background: #181818;
+    color: white;
+   
+}
+

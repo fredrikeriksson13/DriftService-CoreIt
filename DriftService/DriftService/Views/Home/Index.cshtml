@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DriftService.Models.Log>
+<link rel="stylesheet" href="~/Content/StyleSheetLogsTable.css"/>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container ImageCenter" >
+        <img src="Content\Images\LogoCore_3Color.png" alt="Core it photo" />
+    </div>
+</div>
+        
+<div >
+    <table class="table Table-border-spacing">
+        <thead>
+            <tr>
+                <th class="th-td-padding th-first">Rubrik</th>
+                <th class="th-td-padding th-second">Text</th>
+                <th class="th-td-padding th-third">Date</th>
+            </tr>
+        </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="th-td-padding td-first">
+                        <b>@(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0,15) + "..." : item.HeadLine)</b>
+                    </td>
+
+                    <td class="th-td-padding td-second">
+                        <b>@(item.Text.Length > 15 ? item.Text.Substring(0, 15) + "..." : item.Text)</b>
+                    </td>
+
+                    <td class="th-td-padding td-third">
+                        <b>@Html.DisplayFor(modelItem => item.Date)</b>
+                    </td>
+                </tr>
+            }
+</table>
+</div>
+
+
+

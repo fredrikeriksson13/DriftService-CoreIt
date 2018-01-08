@@ -1,0 +1,93 @@
+﻿@model DriftService.Models.ContactViewModel
+<link rel="stylesheet" href="~/Content/StyleSheet.css" />
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container text-aligin-center">
+        <h2><b>Contact details</b></h2>
+    </div>
+</div>
+
+<div class=" col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt class="Margin-top-20">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd class="Margin-top-20">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt class="Margin-top-20">
+            @Html.DisplayNameFor(model => model.Business)
+        </dt>
+
+        <dd class="Margin-top-20">
+            @Html.DisplayFor(model => model.Business)
+        </dd>
+
+        <dt class="Margin-top-20">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd class="Margin-top-20">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt class="Margin-top-20">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd class="Margin-top-20">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt class="Margin-top-20">
+            @Html.DisplayNameFor(model => model.NotificationType)
+        </dt>
+
+        <dd class="Margin-top-20">
+            @switch (Model.NotificationType)
+            {
+                case 0:
+                    <p>-</p>
+                    break;
+                case 1:
+                    <p>SMS</p>
+                    break;
+                case 2:
+                    <p>Email</p>
+                    break;
+                case 3:
+                    <p>SMS & Email</p>
+                    break;
+            }
+        </dd>
+        <dt class="Margin-top-20">
+            ServiceType
+        </dt>
+        <dd class="Margin-top-20">
+            @foreach (var item in Model.ServiceTypeList)
+            {
+                if (Model.ContactServiceTypeList.Any(x => x.ServiceTypeID == item.ServiceTypeID))
+                {
+                    <p for="@item.Description">@item.Description</p>
+                }
+            }
+        </dd>
+    </dl>
+  </div>
+    
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ContactID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

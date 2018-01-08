@@ -1,0 +1,85 @@
+﻿@model DriftService.Models.MessageViewModel
+
+
+@Styles.Render("~/Content/css")
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container text-aligin-center">
+        <h2><b>Send Message</b></h2>
+        @*<div style="color:green">@ViewBag.ConfirmationMessage</div>*@
+    </div>
+</div>
+
+<div style="font-family:Arial">
+@using (@Html.BeginForm(null, null, FormMethod.Post, new { id = "SendMessageForm" }))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <h4>Enter subject:</h4>
+                    @Html.TextAreaFor(m => m.Subject, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Subject, "", new { @style = "color:red" })
+                </div>
+
+                <div class="">
+                    <h4>Enter message:</h4>
+                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Message, "", new { @style = "color:red" })
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-md-6 col-lg-6" >
+                <div id="DivDynamicCheckboxes">
+                    <h3>Servicetyp</h3>
+                    @foreach (var item in Model.ServiceTypeList)
+                    {
+                        bool isChecked = false;
+                        if (Model.SelectedServiceType != null)
+                        {
+                            if (Model.SelectedServiceType.Any(x => x == item.ServiceTypeID))
+                            {
+                                isChecked = true;
+                            }
+                        }
+                        <div class="ServiceTypeBlock">
+                                <label for="@item.Description">@item.Description</label>
+                            <div class="ServiceTypeCheckBox">
+                                <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="@item.ServiceTypeID" checked="@isChecked" />
+                            </div>
+                        </div>
+                      
+                    }
+                    <div class="text-danger">@ViewBag.NoServiceTypSelected</div>
+                </div>
+            </div>
+        </div>
+
+ <div class="row">
+    <div class="col-xs-2 col-md-2 col-lg-2">
+        <h3>NotificationType</h3>
+        <div class="BorderBlack">
+            <div class="checkBoxMargin">
+                    @Html.CheckBoxFor(m => m.SendSms)<b>SMS</b><br /><br />
+                    @Html.CheckBoxFor(m => m.SendMail)<b>Email</b>
+                </div>
+            </div>
+        <div class="text-danger">@ViewBag.NoNotificationTypeSelected</div>
+        <div class="text-danger">@ViewBag.NoSubscribersMessage</div>
+         </div>
+   </div>
+
+        <div class="row">
+            <br />
+         <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
+               <input class="btn-primary" type="submit" value="Send" id="BtnSendMessage" />
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+           }
+
+</div>
+
+
+

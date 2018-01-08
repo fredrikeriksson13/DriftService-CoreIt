@@ -1,0 +1,66 @@
+﻿.ServiceTypeBlock {
+    border: solid;
+    border-color: black;
+    border-radius: 5px;
+    border-width: 1px;
+    margin: 5px;
+    width: 100px;
+    padding:5px;
+    float: left;
+}
+
+.ServiceTypeCheckBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-aligin-right {
+    text-align: right;
+}
+
+.text-aligin-left {
+    text-align: left;
+}
+
+.BorderBlack {
+    border: solid;
+    border-color: black;
+    border-radius: 5px;
+    border-width: 1px;
+    text-align: center;
+    min-width: 150px;
+}
+.checkBoxMargin{
+    margin:5px;
+}
+
+.margin-top-30 {
+    margin-top: 28px;
+}
+
+.margin-bot-20{
+    margin-bottom:20px;
+}
+
+.border-radius-5px{
+    border-radius: 5px;
+}
+
+input{
+    border-radius:5px;
+}
+
+#SearchBtn {
+    border-radius: 15px;
+    height:30px;
+    width:30px;
+}
+
+h2{
+    text-align:center;
+}
+
+.Margin-top-20{
+    margin-top:20px;
+}

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DriftService.Models.Log>
+<link rel="stylesheet" href="~/Content/StyleSheetLogsTable.css" />
+<link rel="stylesheet" href="~/Content/StyleSheet.css" />
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container text-aligin-center">
+        <h2><b>Logs</b></h2>
+    </div>
+</div>
+
+
+    <div class="container ">
+        <div class="row ">
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
+{
+            <div class="col-sm-3 col-md-3 col-lg-3 margin-bot-20">
+                <p><b>Find by name</b></p> 
+                @Html.TextBox("SearchString", null, new { placeholder = "Write here..." })
+            </div>
+
+            <div class="col-sm-3 col-md-3 col-lg-3 margin-bot-20">
+                <p><b>Find by date</b></p>
+                @Html.TextBox("SearchDate", null, new { placeholder = ViewBag.SelectedDate, id = "datepicker" })
+            </div>
+
+            <div class="col-sm-3 col-md-3 col-lg-3  text-aligin-left margin-top-30 margin-bot-20">
+                <button type="submit" value="Search" id="SearchBtn" class="btn-primary glyphicon glyphicon-search "></button>
+            </div>
+}
+        </div>
+
+
+       
+        <div class="row">
+            <table class="table Table-border-spacing">
+                <thead>
+                    <tr>
+                        <th class="th-td-padding th-first">
+                            @Html.DisplayNameFor(model => model.HeadLine)
+                        </th>
+                        <th class="th-td-padding th-second">
+                            @Html.DisplayNameFor(model => model.Text)
+                        </th>
+                        <th class="th-td-padding th-third">
+                            @Html.DisplayNameFor(model => model.Date)
+                        </th>
+                    </tr>
+                </thead>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="th-td-padding td-first">
+                           @(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0, 15) + "..." : item.HeadLine)
+                        </td>
+                        <td class="th-td-padding td-second">
+                           @(item.Text.Length > 15 ? item.Text.Substring(0, 15) + "..." : item.Text)
+                        </td>
+                        <td class="th-td-padding td-third">
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", new { id = item.LogID })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+

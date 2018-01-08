@@ -1,0 +1,132 @@
+﻿@model IEnumerable<DriftService.Models.Contact>
+<link rel="stylesheet" href="~/Content/StyleSheet.css" />
+<link rel="stylesheet" href="~/Content/StyleSheetContactsTable.css" />
+
+
+<div class="jumbotron jumbotron-fluid">
+   <div class="container">
+       <div class="text-aligin-center">
+           <h2><b>Contacts</b></h2>
+       </div>
+   </div>
+</div>
+
+<div class="row ">
+    <div class=" col-sm-3 col-md-3 col-lg-3 margin-bot-20">
+        <p><b>Find by name</b></p>
+        @using (Html.BeginForm())
+        {
+            @Html.TextBox("SearchString", null, new { placeholder = "Write here..." })
+            
+            @*<input type="submit" value="Search" />*@
+        }
+    </div>
+
+    <div class="col-sm-3 col-md-3 col-lg-3 margin-top-30 margin-bot-20">
+        <button type="submit" value="Search" id="SearchBtn" class="btn-primary glyphicon glyphicon-search "></button>
+    </div>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.ActionLink("Firstname", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Lastname", "Index", new { sortOrder = ViewBag.LastNameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NotificationType)
+                </th>
+                <th>
+                    @Html.ActionLink("Create New", "Create")
+                </th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Business)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @{
+                        string NotificationTypeName;
+                    }
+
+                    @switch (item.NotificationType)
+                {
+                    case 1:
+                        NotificationTypeName = "Sms";
+                        break;
+                    case 2:
+                        NotificationTypeName = "Email";
+                        break;
+                    case 3:
+                        NotificationTypeName = "Sms & Email";
+                        break;
+                    default:
+                        NotificationTypeName = "-";
+                        break;
+                }
+
+                    @NotificationTypeName
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ContactID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ContactID }) 
+                    @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
+                    {
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal"
+                            data-whatever="@item.ContactID">
+                        Delete
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b></span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </td>
+            </tr>
+         }
+    </table>
+
+</div>
