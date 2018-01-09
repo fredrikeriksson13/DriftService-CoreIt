@@ -12,11 +12,13 @@ namespace DriftService.Views.Contact
     {
         DriftContext db = new DriftContext();
         List<Log> ListOfLogs = new List<Log>();
+        string StringForParsing = "";
 
         // GET: Log
         public ActionResult Index(string searchString, string searchDate)
         {
-            ListOfLogs = db.Logs.ToList();
+            FindAndParserSelectedServiceType();
+
             List<Log> ListAfterSearch = new List<Log>();
             List<Log> ListForRemoveBasisDate = new List<Log>();
 
@@ -48,15 +50,41 @@ namespace DriftService.Views.Contact
                 }
             }
             ListOfLogs = ListOfLogs.OrderByDescending(o => o.Date).ToList();
-            ViewBag.SelectedDate = searchDate;
-
+            ViewBag.SelectedDate = searchDate;            
             return View(ListOfLogs);
         }
 
         public ActionResult Details(int? id)
         {
             var log = db.Logs.Find(id);
+            FindAndParserSelectedServiceType();
+            var l = ListOfLogs.Find(x => x.LogID == id);
+            ViewBag.SelectedServiceType = l.SelectedServiceType;
             return View(log);
+        }
+
+        public void FindAndParserSelectedServiceType()
+        {
+            foreach (var i in db.Logs.ToList())
+            {
+                string[] SplitedString = i.SelectedServiceType.Split(':');
+                foreach (var ii in SplitedString)
+                {
+                    var s = db.ServiceTypes.ToList().Find(x => x.ServiceTypeID.ToString() == ii);
+                    if (string.IsNullOrWhiteSpace(StringForParsing))
+                    {
+                        StringForParsing = s.Description;
+                    }
+                    else
+                    {
+                        StringForParsing = StringForParsing + ", " + s.Description;
+                    }
+                }
+                i.SelectedServiceType = StringForParsing;
+                ListOfLogs.Add(i);
+                StringForParsing = "";
+            }
+
         }
     }
 }
