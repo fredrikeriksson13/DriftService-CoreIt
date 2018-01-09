@@ -11,20 +11,18 @@
    </div>
 </div>
 
-<div class="row ">
-    <div class=" col-sm-3 col-md-3 col-lg-3 margin-bot-20">
+<div class="row" style="width:75%">
+@using (Html.BeginForm())
+{
+    <div class="col-sm-3 col-md-3 col-lg-3 margin-bot-20">
         <p><b>Find by name</b></p>
-        @using (Html.BeginForm())
-        {
             @Html.TextBox("SearchString", null, new { placeholder = "Write here..." })
-            
-            @*<input type="submit" value="Search" />*@
-        }
     </div>
 
     <div class="col-sm-3 col-md-3 col-lg-3 margin-top-30 margin-bot-20">
-        <button type="submit" value="Search" id="SearchBtn" class="btn-primary glyphicon glyphicon-search "></button>
+        <button type="submit" value="Search" id="SearchBtn" class="btn-primary glyphicon glyphicon-search"></button>
     </div>
+}
 </div>
 
 <div>

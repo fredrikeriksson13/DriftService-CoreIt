@@ -17,22 +17,22 @@ namespace DriftService.Controllers
 
         public ActionResult Index(string sortOrder, string searchString)
         {
-            ViewBag.FirstNameSortParm = String.IsNullOrEmpty(sortOrder) ? "Contacts_FirstName" : "";
-            ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "Contacts_LastName" : "";
-            ViewBag.CompanyNameSortParm = String.IsNullOrEmpty(sortOrder) ? "Company_LastName" : "";
+            ViewBag.FirstNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_FirstName" : "";
+            ViewBag.LastNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_LastName" : "";
+            ViewBag.CompanyNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Company_LastName" : "";
           
-                var Contacts = (from s in db.Contacts
-                                select s);
+            var Contacts = (from s in db.Contacts
+                            select s);
 
             if (Contacts == null)
             {
                 return HttpNotFound();
             }
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 Contacts = Contacts.Where(s => s.FirstName.Contains(searchString)
-                                       || s.LastName.Contains(searchString));
+                                       || s.LastName.Contains(searchString) || s.Business.Contains(searchString));
             }
 
             switch (sortOrder)
@@ -198,7 +198,13 @@ namespace DriftService.Controllers
             {
                 Console.WriteLine(ex);
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                
+                contactViewModel.ServiceTypeList = db.ServiceTypes.ToList();
+                contactViewModel.SelectedSms = contactViewModel.SelectedSms;
+                contactViewModel.SelectedEmail = contactViewModel.SelectedEmail;
+                if (SelectedServiceType != null)
+                {
+                    contactViewModel.SelectedServiceTypeList = SelectedServiceType.ToList();
+                }
             }
             return View(contactViewModel);
         }

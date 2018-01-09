@@ -86,7 +86,7 @@ namespace DriftService.Controllers
                         //ToDO: sätt in sms funktion här
                     }
                     
-                    SaveMessageToLogg(model);
+                    SaveMessageToLogg(model, SelectedServiceType);
                     ViewBag.ConfirmationMessage = "Your message have been send";
                     ModelState.Clear();
                     return View(messageViewModel);
@@ -108,14 +108,30 @@ namespace DriftService.Controllers
             return View(messageViewModel);
         }
         
-        public void SaveMessageToLogg(MessageViewModel model)
+        public void SaveMessageToLogg(MessageViewModel model, int[] selectedServiceType)
         {
+            string s = "";
+
+            foreach (int i in selectedServiceType)
+            {
+                if (String.IsNullOrWhiteSpace(s))
+                {
+                    s = i.ToString();
+                }
+                else
+                {
+                    s = s + ":" + i.ToString();
+                }                
+            }
+
             Log log = new Log()
             {
                 Date = DateTime.Now,
                 HeadLine = model.Subject,
-                Text = model.Message
+                Text = model.Message,
+                SelectedServiceType = s
             };
+
             db.Logs.Add(log);
             db.SaveChanges();
         }
