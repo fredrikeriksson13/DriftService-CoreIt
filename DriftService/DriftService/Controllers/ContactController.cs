@@ -197,7 +197,7 @@ namespace DriftService.Controllers
             catch(Exception ex)
             {
                 Console.WriteLine(ex);
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                ModelState.AddModelError("", "Unable to save changes. Please try again, and if the problem persists, see your system administrator.");
                 contactViewModel.ServiceTypeList = db.ServiceTypes.ToList();
                 contactViewModel.SelectedSms = contactViewModel.SelectedSms;
                 contactViewModel.SelectedEmail = contactViewModel.SelectedEmail;
