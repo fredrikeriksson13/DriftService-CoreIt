@@ -35,7 +35,7 @@
                     </td>
 
                     <td class="th-td-padding th-fourth">
-                        @(item.SelectedServiceType)
+                        @(item.SelectedServiceType.Length > 20 ? item.SelectedServiceType.Substring(0, 20) + "..." : item.SelectedServiceType)
                     </td>
                 </tr>
             }

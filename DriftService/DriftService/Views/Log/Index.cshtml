@@ -54,7 +54,7 @@
                             @Html.DisplayFor(modelItem => item.Date)
                         </td>
                         <td class="th-td-padding td-fourth">
-                            @Html.DisplayFor(modelItem => item.SelectedServiceType)
+                            @(item.SelectedServiceType.Length > 20 ? item.SelectedServiceType.Substring(0, 20) + "..." : item.SelectedServiceType)
                         </td>
                         <td>
                             @Html.ActionLink("Details", "Details", new { id = item.LogID })

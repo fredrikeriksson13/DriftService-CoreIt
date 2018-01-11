@@ -134,7 +134,7 @@ namespace DriftService.Controllers
 
             using (var smtp = new SmtpClient())
             {
-                await smtp.SendMailAsync(message);
+                //await smtp.SendMailAsync(message);
             }
         }
 
