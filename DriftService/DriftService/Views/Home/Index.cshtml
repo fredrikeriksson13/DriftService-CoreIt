@@ -16,26 +16,26 @@
                 <th class="th-td-padding th-first">Headline</th>
                 <th class="th-td-padding th-second">Text</th>
                 <th class="th-td-padding th-third">Date</th>
-                <th class="th-td-padding th-fourth">Service Type</th>
+                <th class="th-td-padding th-fourth">Servicetype</th>
             </tr>
         </thead>
             @foreach (var item in Model)
             {
                 <tr>
                     <td class="th-td-padding td-first">
-                        <b>@(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0,15) + "..." : item.HeadLine)</b>
+                        @(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0,15) + "..." : item.HeadLine)
                     </td>
 
                     <td class="th-td-padding td-second">
-                        <b>@(item.Text.Length > 15 ? item.Text.Substring(0, 15) + "..." : item.Text)</b>
+                        @(item.Text.Length > 15 ? item.Text.Substring(0, 15) + "..." : item.Text)
                     </td>
 
                     <td class="th-td-padding td-third">
-                        <b>@Html.DisplayFor(modelItem => item.Date)</b>
+                        @Html.DisplayFor(modelItem => item.Date)
                     </td>
 
                     <td class="th-td-padding th-fourth">
-                        <b>@(item.SelectedServiceType)</b>
+                        @(item.SelectedServiceType)
                     </td>
                 </tr>
             }
