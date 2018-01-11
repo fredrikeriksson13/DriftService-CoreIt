@@ -12,9 +12,14 @@
     <table class="table Table-border-spacing">
         <thead>
             <tr>
+<<<<<<< HEAD
                 <th class="th-td-padding th-first">Headline</th>
+=======
+                <th class="th-td-padding th-first">Head</th>
+>>>>>>> 60c4f359dbb846cd25e81d8bc66525bf191f7d1b
                 <th class="th-td-padding th-second">Text</th>
                 <th class="th-td-padding th-third">Date</th>
+                <th class="th-td-padding th-third">Service Type</th>
             </tr>
         </thead>
             @foreach (var item in Model)
@@ -30,6 +35,10 @@
 
                     <td class="th-td-padding td-third">
                         <b>@Html.DisplayFor(modelItem => item.Date)</b>
+                    </td>
+
+                    <td class="th-td-padding td-second">
+                        <b>@(item.SelectedServiceType)</b>
                     </td>
                 </tr>
             }

@@ -35,6 +35,9 @@
                         <th class="th-td-padding th-third">
                             @Html.DisplayNameFor(model => model.Date)
                         </th>
+                        <th class="th-td-padding th-third">
+                            Service Type
+                        </th>
                     </tr>
                 </thead>
 
@@ -49,6 +52,9 @@
                         </td>
                         <td class="th-td-padding td-third">
                             @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td class="th-td-padding td-third">
+                            @Html.DisplayFor(modelItem => item.SelectedServiceType)
                         </td>
                         <td>
                             @Html.ActionLink("Details", "Details", new { id = item.LogID })
