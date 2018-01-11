@@ -109,17 +109,26 @@ namespace DriftService.Controllers
             {
                 message.Bcc.Add(new MailAddress(i.Email));
             }
+            string HeadtextSize = "'font-size:100%';";
+            string unregisterstyle = "'font-size:75%';";
+            string singnatur = "<p><em>Hälsningar: CoreIT Driftservice-Notifikation<br/>Telefon: 00000222222<br/>Mail: CoreIT@Putin4Ever.ru<em></p>";
 
-            string unregister = "<br/><br/><a href='http://www.google.com'><center>Klicka här för att avregistrera</center></a>";
+            string HeadLine = "<p style=" + HeadtextSize + "><b>Core<font color='red'>IT</font> - " + model.Subject + "</p></b>";
+            string unregister = "<a href='http://www.google.com'><center><p style=" + unregisterstyle + ">Klicka här för att avregistrera</p></center></a>";
 
-            message.Subject = model.Subject;
-            message.Body = model.Message + unregister;
+            message.Subject = "Driftservice-Notifikation: " + model.Subject;
+            message.Body = HeadLine + model.Message + "<br/><br/>" + singnatur + unregister;
             
             message.IsBodyHtml = true;
+
             //LinkedResource res = new LinkedResource(@"C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\Content\Images\LogoCore_3Color.png");
             //res.ContentId = "companyLogo";
             //string Body = model.Message + unregister + @"<img src='cid:" + res.ContentId + @"'/>";
+
             //AlternateView alternateView = AlternateView.CreateAlternateViewFromString(Body, null, MediaTypeNames.Text.Html);
+
+            //alternateView.ContentType = new ContentType("text/html"); //verkar inte spela roll
+
             //alternateView.LinkedResources.Add(res);
             //message.AlternateViews.Add(alternateView);
 
