@@ -15,15 +15,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <div>
+               <div>
                     <h3><b>Enter subject</b></h3>
-                    @Html.TextAreaFor(m => m.Subject, new { @class = "form-control" })
+                    @Html.TextAreaFor(m => m.Subject, new { @class = "form-control TextboxSubject"})
                     @Html.ValidationMessageFor(m => m.Subject, "", new { @style = "color:red" })
-                </div>
+               </div>
 
-                <div class="">
+                <div >
                     <h3><b>Enter message</b></h3>
-                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
+                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control TextboxMessage" })
                     @Html.ValidationMessageFor(m => m.Message, "", new { @style = "color:red" })
                 </div>
             </div>
@@ -71,8 +71,7 @@
         <div style="color:green"><b>@ViewBag.ConfirmationMessage</b></div>
         <div style="color:red">@ViewBag.Error</div>
 
-        <div class="row">
-            <br />
+       <div class="row">
          <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
                <input class="btn-default" type="submit" value="Send" id="BtnSendMessage" />
                 @Html.ActionLink("Back to List", "Index")

@@ -1,5 +1,7 @@
 ﻿@model DriftService.Models.Log
 <link rel="stylesheet" href="~/Content/StyleSheetContactsTable.css" />
+<link rel="stylesheet" href="~/Content/StyleSheet.css" />
+
 
 <div class="banner">
     <div class="banner-content">
@@ -17,7 +19,7 @@
 
         <dd >
             <br />
-            @Html.TextAreaFor(model => model.HeadLine, new { @readonly = true })
+            @Html.TextAreaFor(model => model.HeadLine, new { @readonly = true, @class = "form-control TextboxSubject" })
         </dd>
       
         <dt>
@@ -27,7 +29,7 @@
 
         <dd >
             <br />
-            @Html.TextAreaFor(model => model.Text, new { @readonly = true })
+            @Html.TextAreaFor(model => model.Text, new { @readonly = true, @class = "form-control TextboxMessage" })
         </dd>
 
         <dt>
@@ -42,7 +44,7 @@
 
         <dt>
             <br />
-            Service Type
+            Servicetype
         </dt>
 
         <dd>

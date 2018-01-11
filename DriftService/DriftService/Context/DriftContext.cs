@@ -12,9 +12,7 @@ namespace DriftService.Context
     {
         public DriftContext() : base("DriftServiceDb")
         {
-            //Database.SetInitializer<DriftContext>(null);
-            //Remove when its done
-         Database.SetInitializer<DriftContext>(new CreateDatabaseIfNotExists<DriftContext>());
+            Database.SetInitializer<DriftContext>(new CreateDatabaseIfNotExists<DriftContext>());
         }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }

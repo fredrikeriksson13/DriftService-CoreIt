@@ -10,6 +10,24 @@ img {
     height: auto;
 }
 
+input {
+    border-radius: 5px;
+}
+
+h2 {
+    text-align: center;
+}
+
+footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 30px;
+    width: 100%;
+    background: #999;
+}
+
+
 .ImageCenter {
     text-align: center;
 }
@@ -33,9 +51,9 @@ img {
     border-radius: 5px;
     border-width: 1px;
     margin: 5px;
-    width: 100px;
     padding:5px;
     float: left;
+    min-width:100px;
 }
 
 .ServiceTypeCheckBox {
@@ -76,29 +94,28 @@ img {
     border-radius: 5px;
 }
 
-input{
-    border-radius:5px;
-}
-
-h2{
-    text-align:center;
-}
-
 .Margin-top-20{
     margin-top:20px;
 }
 
-footer {
-    position: fixed;
-    left: 0px;
-    bottom: 0px;
-    height: 30px;
-    width: 100%;
-    background: #999;
-}
 
 #ContactDeleteBtn {
     display: inline-block;
     text-align: right;
     vertical-align: top;
+}
+
+.TextboxSubject{
+    resize:none;
+    min-width:280px;
+    min-height:70px;
+    max-height:70px;
+   
+}
+
+.TextboxMessage {
+    resize: none;
+    min-width: 280px;
+    min-height: 150px;
+    max-height: 150px;
 }
