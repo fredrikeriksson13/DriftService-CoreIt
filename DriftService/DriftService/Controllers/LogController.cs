@@ -56,13 +56,10 @@ namespace DriftService.Views.Contact
             {
                 ViewBag.SelectedDate = " Enter date...";
             }
-<<<<<<< HEAD
-           
 
-=======
             ListOfLogs = ListOfLogs.OrderByDescending(o => o.Date).ToList();
             ViewBag.SelectedDate = searchDate;            
->>>>>>> 60c4f359dbb846cd25e81d8bc66525bf191f7d1b
+
             return View(ListOfLogs);
         }
 

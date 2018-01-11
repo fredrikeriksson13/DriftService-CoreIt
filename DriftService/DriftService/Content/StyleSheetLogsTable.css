@@ -27,6 +27,12 @@
 
 
 .th-third {
+    border-radius: 0 0 0 0;
+    background: #181818;
+    color: white;
+}
+
+.th-fourth {
     border-radius: 0 0.6em 0.6em 0;
     background: #181818;
     color: white;
@@ -47,9 +53,14 @@
     color: white;
 }
 
-.td-third { 
-    border-radius: 0 0.6em 0.6em 0;
+.td-third {
+    border-radius: 0 0 0 0;
     background: #181818;
     color: white;
 }
 
+.td-fourth {
+    border-radius: 0 0.6em 0.6em 0;
+    background: #181818;
+    color: white;
+}

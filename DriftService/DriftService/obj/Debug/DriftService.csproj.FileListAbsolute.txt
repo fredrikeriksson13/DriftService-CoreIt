@@ -280,3 +280,14 @@ C:\Users\java\Documents\GitHub\DriftService\DriftService\DriftService\obj\Debug\
 C:\Users\java\Documents\GitHub\DriftService\DriftService\DriftService\obj\Debug\DriftService.csproj.CoreCompileInputs.cache
 C:\Users\java\Documents\GitHub\DriftService\DriftService\DriftService\obj\Debug\DriftService.dll
 C:\Users\java\Documents\GitHub\DriftService\DriftService\DriftService\obj\Debug\DriftService.pdb
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\System.IO.FileSystem.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\System.IO.FileSystem.Primitives.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\System.Security.Cryptography.Primitives.dll
+C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\bin\roslyn\VBCSCompiler.exe
