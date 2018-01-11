@@ -1,4 +1,33 @@
-﻿.ServiceTypeBlock {
+﻿.jumbotron {
+    background-color: white;
+    border-bottom: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000
+}
+
+img {
+    width: 50%;
+    height: auto;
+}
+
+.ImageCenter {
+    text-align: center;
+}
+
+.banner {
+    
+    padding: 15px;
+    text-align: center;
+    background-color: #999;
+    border-radius:5px;
+    margin-bottom:15px;
+}
+.banner h2{
+    color:white;
+}
+
+
+.ServiceTypeBlock {
     border: solid;
     border-color: black;
     border-radius: 5px;
@@ -51,16 +80,25 @@ input{
     border-radius:5px;
 }
 
-#SearchBtn {
-    border-radius: 15px;
-    height:30px;
-    width:30px;
-}
-
 h2{
     text-align:center;
 }
 
 .Margin-top-20{
     margin-top:20px;
+}
+
+footer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    height: 30px;
+    width: 100%;
+    background: #999;
+}
+
+#ContactDeleteBtn {
+    display: inline-block;
+    text-align: right;
+    vertical-align: top;
 }

@@ -1,11 +1,12 @@
 ﻿@model DriftService.Models.ContactViewModel
 <link rel="stylesheet" href="~/Content/StyleSheet.css" />
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container text-aligin-center">
+<div class="banner">
+    <div class="banner-content">
         <h2><b>Contact details</b></h2>
     </div>
 </div>
+
 
 <div class=" col-sm-offset-4 col-md-offset-4 col-lg-offset-4">
     <hr />
@@ -72,7 +73,7 @@
             }
         </dd>
         <dt class="Margin-top-20">
-            ServiceType
+            Servicetype
         </dt>
         <dd class="Margin-top-20">
             @foreach (var item in Model.ServiceTypeList)
@@ -87,7 +88,7 @@
   </div>
     
 
-<p>
+    <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right">
     @Html.ActionLink("Edit", "Edit", new { id = Model.ContactID }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+    </div>

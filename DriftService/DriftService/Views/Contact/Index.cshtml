@@ -2,25 +2,19 @@
 <link rel="stylesheet" href="~/Content/StyleSheet.css" />
 <link rel="stylesheet" href="~/Content/StyleSheetContactsTable.css" />
 
-
-<div class="jumbotron jumbotron-fluid">
-   <div class="container">
-       <div class="text-aligin-center">
-           <h2><b>Contacts</b></h2>
-       </div>
-   </div>
+ <div class="banner">
+    <div class="banner-content">
+        <h2><b>Contacts</b></h2>
+    </div>
 </div>
 
-<div class="row" style="width:75%">
+<div class="form-horizontal" >
 @using (Html.BeginForm())
 {
-    <div class="col-sm-3 col-md-3 col-lg-3 margin-bot-20">
-        <p><b>Find by name</b></p>
-            @Html.TextBox("SearchString", null, new { placeholder = "Write here..." })
-    </div>
 
-    <div class="col-sm-3 col-md-3 col-lg-3 margin-top-30 margin-bot-20">
-        <button type="submit" value="Search" id="SearchBtn" class="btn-primary glyphicon glyphicon-search"></button>
+    <div class="form-group col-sm-6 col-md-6 ">
+        @Html.TextBox("SearchString", null, new { placeholder = " Enter name..." })
+        <button type="submit" value="Search" class=" glyphicon glyphicon-search btn-sm btn-default"></button>
     </div>
 }
 </div>
@@ -96,32 +90,34 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ContactID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ContactID }) 
-                    @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
-                    {
-                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal"
-                            data-whatever="@item.ContactID">
-                        Delete
-                    </button>
+                    @Html.ActionLink("Details", "Details", new { id = item.ContactID }) |
+                    <div id="ContactDeleteBtn" >
+                        @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
+                        {
+                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"
+                                    data-whatever="@item.ContactID">
+                                Delete
+                            </button>
                     <!-- Modal -->
-                    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog modal-sm" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b></span>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <input type="submit" value="Delete" class="btn btn-danger" />
+                            <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Confirm Delete </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b></span>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <input type="submit" value="Delete" class="btn btn-danger" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     </div>
-                    }
                 </td>
             </tr>
          }

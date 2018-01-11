@@ -1,12 +1,11 @@
 ﻿@model DriftService.Models.ContactViewModel
 <link rel="stylesheet" href="~/Content/StyleSheet.css" />
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container text-aligin-center">
+<div class="banner">
+    <div class="banner-content">
         <h2><b>Edit Contact</b></h2>
     </div>
 </div>
-
 
   
     @using (Html.BeginForm())
@@ -106,9 +105,8 @@
             </div>
            
             <div class="row">
-                <br />
                 <div class="col-xs-2 col-md-2 col-lg-2">
-                    <h3>NotificationType</h3>
+                    <h3>Notificationtype</h3>
                     <div class="BorderBlack">
                         <div class="checkBoxMargin">
                             @Html.CheckBoxFor(m => m.SelectedSms)<b>SMS</b><br /><br />
@@ -125,10 +123,10 @@
                 <br />
                 
                     <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right" >
-                        <div >
-                            <input type="submit" value="Save" class="btn btn-primary" />
+                       
+                            <input type="submit" value="Save" class="btn btn-default" />
                             @Html.ActionLink("Back to List", "Index")
-                        </div>
+                      
                     </div>
                 </div>
               </div>

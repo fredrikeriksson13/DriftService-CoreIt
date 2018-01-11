@@ -3,10 +3,9 @@
 
 @Styles.Render("~/Content/css")
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container text-aligin-center">
+<div class="banner">
+    <div class="banner-content">
         <h2><b>Send Message</b></h2>
-        <div style="color:green">@ViewBag.ConfirmationMessage</div>
     </div>
 </div>
 
@@ -17,13 +16,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div>
-                    <h4>Enter subject:</h4>
+                    <h3><b>Enter subject</b></h3>
                     @Html.TextAreaFor(m => m.Subject, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Subject, "", new { @style = "color:red" })
                 </div>
 
                 <div class="">
-                    <h4>Enter message:</h4>
+                    <h3><b>Enter message</b></h3>
                     @Html.TextAreaFor(m => m.Message, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Message, "", new { @style = "color:red" })
                 </div>
@@ -57,7 +56,7 @@
 
  <div class="row">
     <div class="col-xs-2 col-md-2 col-lg-2">
-        <h3>NotificationType</h3>
+        <h3>Notificationtype</h3>
         <div class="BorderBlack">
             <div class="checkBoxMargin">
                     @Html.CheckBoxFor(m => m.SendSms)<b>SMS</b><br /><br />
@@ -72,7 +71,7 @@
         <div class="row">
             <br />
          <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
-               <input class="btn-primary" type="submit" value="Send" id="BtnSendMessage" />
+               <input class="btn-default" type="submit" value="Send" id="BtnSendMessage" />
                 @Html.ActionLink("Back to List", "Index")
             </div>
         </div>

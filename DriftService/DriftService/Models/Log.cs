@@ -9,6 +9,7 @@ namespace DriftService.Models
     public class Log
     {
         public int LogID { get; set; }
+        [Display(Name = "Headline")]
         public string HeadLine { get; set; }
         public string Text { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]

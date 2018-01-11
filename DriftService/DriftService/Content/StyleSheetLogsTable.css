@@ -1,16 +1,5 @@
 ﻿
 
-img{
-    width: 40%;
-    height: auto;
-}
-
-.ImageCenter{
-    text-align:center;
-}
-
-
-
 .th-td-padding {
     padding: 0.5em 1em;
 }
@@ -24,7 +13,7 @@ img{
 .th-first { 
     border-radius: 0.6em 0 0 0.6em;
     background: #181818;
-    color: red;
+    color: white;
 }
 
 
@@ -32,7 +21,7 @@ img{
 .th-second {
     border-radius: 0 0 0 0;
     background: #181818;
-    color: red;
+    color: white;
 }
 
 
@@ -40,7 +29,7 @@ img{
 .th-third {
     border-radius: 0 0.6em 0.6em 0;
     background: #181818;
-    color: red;
+    color: white;
 }
 
 

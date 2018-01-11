@@ -8,6 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="~/Content/StyleSheet.css" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -33,8 +34,10 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - CoreIt - Driftservice</p>
+        <footer >
+            <div >
+            <img style="max-width:100px;" src="~/Content/Images/LogoCore_3Color.png" alt="Driftservice-Notifikation" />
+        </div>
         </footer>
     </div>
 

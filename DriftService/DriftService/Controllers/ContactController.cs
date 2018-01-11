@@ -100,7 +100,6 @@ namespace DriftService.Controllers
             }
 
              return View(ContactViewModel);
-          
         }
 
         //POST: Contact/Create
@@ -137,8 +136,6 @@ namespace DriftService.Controllers
                     {
                         contactViewModel.SelectedServiceTypeList = SelectedServiceType.ToList();
                     }
-                        
-                    
 
                     return View(contactViewModel);
                 }
@@ -178,7 +175,7 @@ namespace DriftService.Controllers
                     {
                         db.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Contacts', RESEED, 0)");
                         db.SaveChanges();
-                        ID = 1;
+                        ID = 0;
                     }
 
                     foreach (var i in SelectedServiceType) //kolla om detta kan sparas i contact obj direkt

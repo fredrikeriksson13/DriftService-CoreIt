@@ -46,9 +46,15 @@ namespace DriftService.Views.Contact
                 {
                     ListOfLogs.Remove(i);
                 }
+                ListOfLogs = ListOfLogs.OrderByDescending(o => o.Date).ToList();
+
+                ViewBag.SelectedDate = searchDate;
             }
-            ListOfLogs = ListOfLogs.OrderByDescending(o => o.Date).ToList();
-            ViewBag.SelectedDate = searchDate;
+            else if(string.IsNullOrEmpty(searchDate))
+            {
+                ViewBag.SelectedDate = " Enter date...";
+            }
+           
 
             return View(ListOfLogs);
         }

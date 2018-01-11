@@ -2,32 +2,23 @@
 <link rel="stylesheet" href="~/Content/StyleSheetLogsTable.css" />
 <link rel="stylesheet" href="~/Content/StyleSheet.css" />
 
-<div class="jumbotron jumbotron-fluid">
-    <div class="container text-aligin-center">
+<div class="banner">
+    <div class="banner-content">
         <h2><b>Logs</b></h2>
     </div>
 </div>
 
 
-    <div class="container ">
-        <div class="row ">
-@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
-{
-            <div class="col-sm-3 col-md-3 col-lg-3 margin-bot-20">
-                <p><b>Find by name</b></p> 
-                @Html.TextBox("SearchString", null, new { placeholder = "Write here..." })
-            </div>
-
-            <div class="col-sm-3 col-md-3 col-lg-3 margin-bot-20">
-                <p><b>Find by date</b></p>
+ <form class="form-horizontal">
+          @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
+          {
+            <div class="form-group col-sm-6">
+                @Html.TextBox("SearchString", null, new { placeholder = " Enter name..." })
                 @Html.TextBox("SearchDate", null, new { placeholder = ViewBag.SelectedDate, id = "datepicker" })
+                <button type="submit" value="Search" id="SearchBtn" class="glyphicon glyphicon-search btn-sm btn-default"></button>
             </div>
-
-            <div class="col-sm-3 col-md-3 col-lg-3  text-aligin-left margin-top-30 margin-bot-20">
-                <button type="submit" value="Search" id="SearchBtn" class="btn-primary glyphicon glyphicon-search "></button>
-            </div>
-}
-        </div>
+          }
+ </form>
 
 
        
@@ -67,5 +58,5 @@
 
             </table>
         </div>
-    </div>
+   
 

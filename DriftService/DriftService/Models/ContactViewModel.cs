@@ -33,7 +33,7 @@ namespace DriftService.Models
         [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number must be numeric")]
         [Display(Name = "Phonenumber")]
         public string PhoneNumber { get; set; }
-
+        [Display(Name = "Notificationtype")]
         public int NotificationType { get; set; }
         public List<ServiceType> ServiceTypeList { get; set; }
 
