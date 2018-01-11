@@ -142,11 +142,11 @@ namespace DriftService.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (contactViewModel.SelectedSms == true)
+                    if (contactViewModel.SelectedEmail == true)
                     {
                         contactViewModel.NotificationType = 1;
                     }
-                    if (contactViewModel.SelectedEmail == true)
+                    if (contactViewModel.SelectedSms == true)
                     {
                         contactViewModel.NotificationType = 2;
                     }
@@ -232,11 +232,11 @@ namespace DriftService.Controllers
 
             if (contact.NotificationType == 1)
             {
-                contactViewModel.SelectedSms = true;
+                contactViewModel.SelectedEmail = true;
             }
             if (contact.NotificationType == 2)
             {
-                contactViewModel.SelectedEmail = true;
+                contactViewModel.SelectedSms = true;
             }
             if (contact.NotificationType == 3)
             {
@@ -281,11 +281,11 @@ namespace DriftService.Controllers
                 
                 if (ModelState.IsValid)
                 {
-                    if (contactViewModel.SelectedSms == true)
+                    if (contactViewModel.SelectedEmail == true)
                     {
                         contactViewModel.NotificationType = 1;
                     }
-                    if (contactViewModel.SelectedEmail == true)
+                    if (contactViewModel.SelectedSms == true)
                     {
                         contactViewModel.NotificationType = 2;
                     }

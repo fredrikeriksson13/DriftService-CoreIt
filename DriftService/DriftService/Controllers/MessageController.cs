@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -28,7 +29,7 @@ namespace DriftService.Controllers
         public ActionResult Index()
         {
             return View(messageViewModel);
-        }     
+        }
 
         [HttpPost]
         public async Task<ActionResult> Index(MessageViewModel model, int[] SelectedServiceType)
@@ -64,23 +65,7 @@ namespace DriftService.Controllers
 
                         if (model.SendMail && (ListOfContactsForMail.Count != 0))
                         {
-                            var message = new MailMessage();
-
-                            foreach (var i in ListOfContactsForMail)
-                            {
-                                message.Bcc.Add(new MailAddress(i.Email));
-                            }
-
-                            string unregister = "<br/><a href='http://www.google.com'>Klicka här för att avregistrera</a>";
-
-                            message.Subject = model.Subject;
-                            message.Body = model.Message + unregister;
-                            message.IsBodyHtml = true;
-
-                            using (var smtp = new SmtpClient())
-                            {
-                                await smtp.SendMailAsync(message); //avmarkerat enbart för testning
-                            }
+                            await SendEmail(model);
                         }
                         if (model.SendSms && (ListOfContactsForMail.Count != 0))
                         {
@@ -110,13 +95,40 @@ namespace DriftService.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = "Unable to send notification. Please try again, and if the problem persists, see your system administrator."; 
+                ViewBag.Error = "Unable to send notification. Please try again, and if the problem persists, see your system administrator.";
                 messageViewModel.SelectedServiceType = SelectedServiceType;
                 return View(messageViewModel);
             }
-            
         }
-        
+
+        private async Task SendEmail(MessageViewModel model)
+        {
+            var message = new MailMessage();
+
+            foreach (var i in ListOfContactsForMail)
+            {
+                message.Bcc.Add(new MailAddress(i.Email));
+            }
+
+            string unregister = "<br/><br/><a href='http://www.google.com'><center>Klicka här för att avregistrera</center></a>";
+
+            message.Subject = model.Subject;
+            message.Body = model.Message + unregister;
+            
+            message.IsBodyHtml = true;
+            //LinkedResource res = new LinkedResource(@"C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\Content\Images\LogoCore_3Color.png");
+            //res.ContentId = "companyLogo";
+            //string Body = model.Message + unregister + @"<img src='cid:" + res.ContentId + @"'/>";
+            //AlternateView alternateView = AlternateView.CreateAlternateViewFromString(Body, null, MediaTypeNames.Text.Html);
+            //alternateView.LinkedResources.Add(res);
+            //message.AlternateViews.Add(alternateView);
+
+            using (var smtp = new SmtpClient())
+            {
+                await smtp.SendMailAsync(message);
+            }
+        }
+
         public void SaveMessageToLogg(MessageViewModel model, int[] selectedServiceType)
         {
             string s = "";
@@ -130,7 +142,7 @@ namespace DriftService.Controllers
                 else
                 {
                     s = s + ":" + i.ToString();
-                }                
+                }
             }
 
             Log log = new Log()
