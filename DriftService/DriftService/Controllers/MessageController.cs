@@ -28,7 +28,7 @@ namespace DriftService.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(messageViewModel);
+           return View(messageViewModel);
         }
 
         [HttpPost]
@@ -77,17 +77,17 @@ namespace DriftService.Controllers
                         ModelState.Clear();
                         return View(messageViewModel);
                     }
-                    ViewBag.NoSubscribersMessage = "There are no contacts suscribed for your selected notifacation profile";
+                    ViewBag.NoSubscribersMessage = "There are no contacts subscribed for your selected notifacation profile";
 
                 }
                 //if not valied 
                 if (SelectedServiceType == null)
                 {
-                    ViewBag.NoServiceTypSelected = "Must select a servicetype";
+                    ViewBag.NoServiceTypSelected = "Must select a service type";
                 }
                 if (model.SendMail == false && model.SendSms == false)
                 {
-                    ViewBag.NoNotificationTypeSelected = "Must select a notificationtype";
+                    ViewBag.NoNotificationTypeSelected = "Must select a notification type";
                 }
 
                 messageViewModel.SelectedServiceType = SelectedServiceType;
@@ -96,7 +96,7 @@ namespace DriftService.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.ToString());
-                ViewBag.Error = "Unable to send notification. Please try again, and if the problem persists, see your system administrator.";
+                ViewBag.Error = "Unable to send notification. Please try again, and if the problem persists, contact your system administrator.";
                 messageViewModel.SelectedServiceType = SelectedServiceType;
                 return View(messageViewModel);
             }
@@ -104,38 +104,31 @@ namespace DriftService.Controllers
 
         private async Task SendEmail(MessageViewModel model)
         {
-            var message = new MailMessage();
-
             foreach (var i in ListOfContactsForMail)
             {
-                message.Bcc.Add(new MailAddress(i.Email));
-            }
-            string HeadtextSize = "'font-size:100%';";
-            string unregisterstyle = "'font-size:75%';";
-            string singnatur = "<p><em>Hälsningar: CoreIT Driftservice-Notifikation<br/>Telefon: 00000222222<br/>Mail: CoreIT@Putin4Ever.ru<em></p>";
+                var message = new MailMessage();
+                message.To.Add(i.Email);
 
-            string HeadLine = "<p style=" + HeadtextSize + "><b>Core<font color='red'>IT</font> - " + model.Subject + "</p></b>";
-            string unregister = "<a href='http://www.google.com'><center><p style=" + unregisterstyle + ">Klicka här för att avregistrera</p></center></a>";
+                string HeadtextSize = "'font-size:100%';";
+                string unregisterstyle = "'font-size:75%';";
+                string singnatur = "<p><em>Hälsningar: CoreIT Driftservice-Notifikation<br/>Telefon: 00000222222<br/>Mail: CoreIT@xxx.ru<em></p>";
 
-            message.Subject = "Driftservice-Notifikation: " + model.Subject;
-            message.Body = HeadLine + model.Message + "<br/><br/>" + singnatur + unregister;
+                string queryString = System.Configuration.ConfigurationManager.AppSettings["UnregisterLink"].ToString() + i.ContactGuid.ToString();
+                string unregiserLink = "<a href='" + queryString + "'>";
+
+
+                string HeadLine = "<p style=" + HeadtextSize + "><b>Hej " + i.FirstName + "!"+ "</p></b>";
+                string unregister = unregiserLink + "<center><p style=" + unregisterstyle + ">Klicka här för att avregistrera</p></center></a>";
+
+                message.Subject = "Driftservice-Notifikation: " + model.Subject;
+                message.Body = HeadLine + model.Message + "<br/><br/>" + singnatur + unregister;
             
-            message.IsBodyHtml = true;
+                message.IsBodyHtml = true;
 
-            //LinkedResource res = new LinkedResource(@"C:\Users\java\Documents\GitHub\DriftService-CoreIt\DriftService\DriftService\Content\Images\LogoCore_3Color.png");
-            //res.ContentId = "companyLogo";
-            //string Body = model.Message + unregister + @"<img src='cid:" + res.ContentId + @"'/>";
-
-            //AlternateView alternateView = AlternateView.CreateAlternateViewFromString(Body, null, MediaTypeNames.Text.Html);
-
-            //alternateView.ContentType = new ContentType("text/html"); //verkar inte spela roll
-
-            //alternateView.LinkedResources.Add(res);
-            //message.AlternateViews.Add(alternateView);
-
-            using (var smtp = new SmtpClient())
-            {
-                await smtp.SendMailAsync(message);
+                using (var smtp = new SmtpClient())
+                {
+                    await smtp.SendMailAsync(message);
+                }
             }
         }
 
@@ -145,7 +138,7 @@ namespace DriftService.Controllers
 
             foreach (int i in selectedServiceType)
             {
-                if (String.IsNullOrWhiteSpace(s))
+                if (string.IsNullOrWhiteSpace(s))
                 {
                     s = i.ToString();
                 }

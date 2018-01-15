@@ -163,6 +163,7 @@ namespace DriftService.Controllers
                         Email = contactViewModel.Email,
                         PhoneNumber = contactViewModel.PhoneNumber,
                         NotificationType = contactViewModel.NotificationType,
+                        ContactGuid = Guid.NewGuid(),
                     };
 
                     int ID;

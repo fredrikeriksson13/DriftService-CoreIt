@@ -10,6 +10,7 @@ namespace DriftService.Models
     {
         [Key]
         public int ContactID { get; set; }
+        public Guid ContactGuid { get; set; }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
