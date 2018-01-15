@@ -171,7 +171,7 @@ namespace DriftService.Controllers
                         ID = (from c in db.Contacts
                                   select c.ContactID).Max() + 1;
                     }
-                    else // Resets Contact identity then gives the first Contact ID 1
+                    else // Resets Contact identity 
                     {
                         db.Database.ExecuteSqlCommand("DBCC CHECKIDENT('Contacts', RESEED, 0)");
                         db.SaveChanges();

@@ -58,18 +58,16 @@ namespace DriftService.Views.Contact
             }
 
             ListOfLogs = ListOfLogs.OrderByDescending(o => o.Date).ToList();
-            ViewBag.SelectedDate = searchDate;            
 
             return View(ListOfLogs);
         }
 
         public ActionResult Details(int? id)
         {
-            var log = db.Logs.Find(id);
             FindAndParserSelectedServiceType();
             var l = ListOfLogs.Find(x => x.LogID == id);
             ViewBag.SelectedServiceType = l.SelectedServiceType;
-            return View(log);
+            return View(l);
         }
 
         public void FindAndParserSelectedServiceType()

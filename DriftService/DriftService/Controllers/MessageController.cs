@@ -83,11 +83,11 @@ namespace DriftService.Controllers
                 //if not valied 
                 if (SelectedServiceType == null)
                 {
-                    ViewBag.NoServiceTypSelected = "Most select a servicetype";
+                    ViewBag.NoServiceTypSelected = "Must select a servicetype";
                 }
                 if (model.SendMail == false && model.SendSms == false)
                 {
-                    ViewBag.NoNotificationTypeSelected = "Most select a notificationtype";
+                    ViewBag.NoNotificationTypeSelected = "Must select a notificationtype";
                 }
 
                 messageViewModel.SelectedServiceType = SelectedServiceType;
@@ -95,6 +95,7 @@ namespace DriftService.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 ViewBag.Error = "Unable to send notification. Please try again, and if the problem persists, see your system administrator.";
                 messageViewModel.SelectedServiceType = SelectedServiceType;
                 return View(messageViewModel);
@@ -134,7 +135,7 @@ namespace DriftService.Controllers
 
             using (var smtp = new SmtpClient())
             {
-                //await smtp.SendMailAsync(message);
+                await smtp.SendMailAsync(message);
             }
         }
 
