@@ -22,45 +22,48 @@
 
 
        
-        <div class="row">
-            <table class="table Table-border-spacing">
-                <thead>
-                    <tr>
-                        <th class="th-td-padding th-first">
-                            @Html.DisplayNameFor(model => model.HeadLine)
-                        </th>
-                        <th class="th-td-padding th-second">
-                            @Html.DisplayNameFor(model => model.Text)
-                        </th>
-                        <th class="th-td-padding th-third">
-                            @Html.DisplayNameFor(model => model.Date)
-                        </th>
-                        <th class="th-td-padding th-fourth">
-                            <b>Service type</b>
-                        </th>
-                    </tr>
-                </thead>
+         <div>
+    <table class="table Table-border-spacing">
+        <thead>
+            <tr>
+                <th class="th-td-padding th-first">
+                    @Html.DisplayNameFor(model => model.HeadLine)
+                </th>
+                <th class="th-td-padding th-second">
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>
+                <th class="th-td-padding th-third">
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <th class="th-td-padding th-fourth">
+                    <b>Service type</b>
+                </th>
+            </tr>
+        </thead>
 
-                @foreach (var item in Model)
-                {
-                    <tr class="searchRow" onclick="document.location='@(Url.Action("Details", new { id = item.LogID }))'">
-                        <td class="th-td-padding td-first">
-                           @(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0, 15) + "..." : item.HeadLine)
-                        </td>
-                        <td class="th-td-padding td-second">
-                           @(item.Text.Length > 15 ? item.Text.Substring(0, 15) + "..." : item.Text)
-                        </td>
-                        <td class="th-td-padding td-third">
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </td>
-                        <td class="th-td-padding td-fourth">
-                            @(item.SelectedServiceType.Length > 20 ? item.SelectedServiceType.Substring(0, 20) + "..." : item.SelectedServiceType)
-                        </td>
-                       
-                    </tr>
-                }
+        @foreach (var item in Model)
+        {
+            <tr class="searchRow" onclick="document.location='@(Url.Action("Details", new { id = item.LogID }))'">
+                <td class="th-td-padding td-first">
+                    @(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0, 15) + "..." : item.HeadLine)
+                </td>
+                <td class="th-td-padding td-second">
+                    @(item.Text.Length > 15 ? item.Text.Substring(0, 15) + "..." : item.Text)
+                </td>
+                <td class="th-td-padding td-third">
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td class="th-td-padding td-fourth">
+                    @(item.SelectedServiceType.Length > 20 ? item.SelectedServiceType.Substring(0, 20) + "..." : item.SelectedServiceType)
+                </td>
 
-            </table>
-        </div>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+
    
 
