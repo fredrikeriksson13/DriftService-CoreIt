@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="~/Content/StyleSheetLogsTable.css" />
 <link rel="stylesheet" href="~/Content/StyleSheet.css" />
 
-<div class="banner">
-    <div class="banner-content">
-        <h2><b>Logs</b></h2>
+<div class="jumbotron jumbotron-fluid jumbotronFirstpage">
+    <div class="container ImageCenter">
+        <img src="~/Content/Images/Driftservice-Notifikation.png" alt="Driftservice-Notifikation" />
     </div>
 </div>
 
@@ -36,14 +36,14 @@
                             @Html.DisplayNameFor(model => model.Date)
                         </th>
                         <th class="th-td-padding th-fourth">
-                            Servicetype
+                            <b>Service type</b>
                         </th>
                     </tr>
                 </thead>
 
                 @foreach (var item in Model)
                 {
-                    <tr>
+                    <tr class="searchRow" onclick="document.location='@(Url.Action("Details", new { id = item.LogID }))'">
                         <td class="th-td-padding td-first">
                            @(item.HeadLine.Length > 15 ? item.HeadLine.Substring(0, 15) + "..." : item.HeadLine)
                         </td>
@@ -56,9 +56,7 @@
                         <td class="th-td-padding td-fourth">
                             @(item.SelectedServiceType.Length > 20 ? item.SelectedServiceType.Substring(0, 20) + "..." : item.SelectedServiceType)
                         </td>
-                        <td>
-                            @Html.ActionLink("Details", "Details", new { id = item.LogID })
-                        </td>
+                       
                     </tr>
                 }
 

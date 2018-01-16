@@ -11,29 +11,29 @@ namespace DriftService.Models
         public int ContactID { get; set; }
         [StringLength(20, ErrorMessage = "Name cannot be longer than 20 characters.")]
         [Required(ErrorMessage = "Please enter Firtst name.")]
-        [Display(Name = "Firstname")]
+        [Display(Name = "First name")]
         public string FirstName { get; set; }
 
         [StringLength(20, ErrorMessage = "Name cannot be longer than 20 characters.")]
         [Required(ErrorMessage = "Please enter Last name.")]
-        [Display(Name = "Lastname")]
+        [Display(Name = "Last name")]
         public string LastName { get; set; }
 
         [StringLength(20, ErrorMessage = "Name cannot be longer than 20 characters.")]
-        [Required(ErrorMessage = "Please enter Company name.")]
+        [Required(ErrorMessage = "Please enter company name.")]
         public string Business { get; set; }
 
         [StringLength(30, ErrorMessage = "Email cannot be longer than 30 characters.")]
         [Required(ErrorMessage = "Please enter Email.")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        [EmailAddress(ErrorMessage = "Invalid email Address")]
         public string Email { get; set; }
 
-        [StringLength(20, ErrorMessage = "Phonenumber cannot be longer than 20 characters.")]
+        [StringLength(20, ErrorMessage = "Phone number cannot be longer than 20 characters.")]
         [Required(ErrorMessage = "Please enter phone number.")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number must be numeric")]
-        [Display(Name = "Phonenumber")]
+        [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
-        [Display(Name = "Notificationtype")]
+        [Display(Name = "Notification type")]
         public int NotificationType { get; set; }
         public List<ServiceType> ServiceTypeList { get; set; }
 

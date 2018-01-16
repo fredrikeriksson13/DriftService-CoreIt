@@ -1,32 +1,50 @@
-﻿
+﻿thead tr a {
+    color: #f90000;
+}
+
+.searchRow:hover {
+    cursor: pointer;
+}
+
+.searchRow:hover td {
+   background-color: #4286f4;
+}
+
+.searchRow:hover td:nth-child(7) {
+    background-color: white;
+}
+
 thead tr th:nth-child(1) {
     border-radius: 0.6em 0 0 0.6em;
-    background: #181818;
+    background-color: #999;
+    color:red;
+    
 }
 
 thead tr th:nth-child(2) {
     border-radius: 0 0 0 0;
-    background: #181818;
-    
+    background-color: #999;
+    color: red;
 }
 thead tr th:nth-child(3) {
     border-radius: 0 0 0 0;
-    background: #181818;
+    background-color: #999;
+    color: red;
 }
 thead tr th:nth-child(4) {
     border-radius: 0 0 0 0;
-    background: #181818;
-    color: white;
+    background-color: #999;
+    color: black;
 }
 thead tr th:nth-child(5) {
     border-radius: 0 0 0 0;
-    background: #181818;
-    color: white;
+    background-color: #999;
+    color: black;
 }
 thead tr th:nth-child(6) {
     border-radius: 0 0.6em 0.6em 0;
-    background: #181818;
-    color: white;
+    background-color: #999;
+    color: black;
 }
 
 tbody td:nth-child(1) /* This is now the middle element out of three */ {
@@ -60,7 +78,8 @@ tbody td:nth-child(6) /* This is now the middle element out of three */ {
     border-radius: 0 0.6em 0.6em 0;
     background: #181818;
     color: white;
-   
 }
+
+
 
 

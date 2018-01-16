@@ -10,34 +10,42 @@
 }
 
 
-.th-first { 
+.th-first {
     border-radius: 0.6em 0 0 0.6em;
-    background: #181818;
-    color: white;
+    background-color: #999;
+    color: black;
 }
 
 
 
 .th-second {
     border-radius: 0 0 0 0;
-    background: #181818;
-    color: white;
+    background-color: #999;
+    color: black;
 }
 
 
 
 .th-third {
     border-radius: 0 0 0 0;
-    background: #181818;
-    color: white;
+    background-color: #999;
+    color: black;
 }
 
 .th-fourth {
     border-radius: 0 0.6em 0.6em 0;
-    background: #181818;
-    color: white;
+    background-color: #999;
+    color: black;
 }
 
+.searchRow:hover {
+    
+    cursor: pointer;
+}
+
+.searchRow:hover td {
+        background-color: #4286f4;
+}
 
 .td-first {
     border-radius: 0.6em 0 0 0.6em;

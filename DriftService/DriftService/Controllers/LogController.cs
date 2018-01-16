@@ -32,34 +32,35 @@ namespace DriftService.Views.Contact
                     }
                 }
                 ListOfLogs = ListAfterSearch;
+                return View(ListOfLogs.OrderByDescending(o => o.Date).ToList());
             }
 
             if (!string.IsNullOrEmpty(searchDate))
-            {               
+            {
+                DateTime SelectedDate = Convert.ToDateTime(searchDate).AddDays(1);
+                DateTime TwoWeeksBefore = SelectedDate.AddDays(-14);
                 foreach (var i in ListOfLogs)
                 {
-                    var dbDate = i.Date.ToString().Remove(10,9);
-                    if (dbDate != searchDate)
+                    if(i.Date > SelectedDate || i.Date < TwoWeeksBefore)
                     {
                         ListForRemoveBasisDate.Add(i);
                     }
                 }
+
                 foreach (var i in ListForRemoveBasisDate)
                 {
                     ListOfLogs.Remove(i);
                 }
-                ListOfLogs = ListOfLogs.OrderByDescending(o => o.Date).ToList();
 
                 ViewBag.SelectedDate = searchDate;
+                return View(ListOfLogs.OrderByDescending(o => o.Date).ToList());
             }
             else if(string.IsNullOrEmpty(searchDate))
             {
                 ViewBag.SelectedDate = " Enter date...";
             }
 
-            ListOfLogs = ListOfLogs.OrderByDescending(o => o.Date).ToList();
-
-            return View(ListOfLogs);
+            return View(ListOfLogs.OrderByDescending(o => o.Date).ToList().Take(50));
         }
 
         public ActionResult Details(int? id)
@@ -70,7 +71,12 @@ namespace DriftService.Views.Contact
             return View(l);
         }
 
-        public void FindAndParserSelectedServiceType()
+        public ActionResult About()
+        {
+            return View();
+        }
+
+            public void FindAndParserSelectedServiceType()
         {
             foreach (var i in db.Logs.ToList())
             {

@@ -15,9 +15,9 @@ namespace DriftService.Models
         public string LastName { get; set; }
         public string Business { get; set; }
         public string Email { get; set; }
-        [Display(Name = "Phonenumber")]
+        [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
-        [Display(Name = "Notificationtype")]
+        [Display(Name = "Notification type")]
         public int NotificationType { get; set; }
 
         public virtual ICollection<ContactServiceType> ContactServiceType { get; set; }

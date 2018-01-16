@@ -11,7 +11,6 @@
 <div class="form-horizontal" >
 @using (Html.BeginForm())
 {
-
     <div class="form-group col-sm-6 col-md-6 ">
         @Html.TextBox("SearchString", null, new { placeholder = " Enter name..." })
         <button type="submit" value="Search" class=" glyphicon glyphicon-search btn-sm btn-default"></button>
@@ -24,10 +23,10 @@
         <thead>
             <tr>
                 <th>
-                    @Html.ActionLink("Firstname", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
+                    @Html.ActionLink("First name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
                 </th>
                 <th>
-                    @Html.ActionLink("Lastname", "Index", new { sortOrder = ViewBag.LastNameSortParm })
+                    @Html.ActionLink("Last name", "Index", new { sortOrder = ViewBag.LastNameSortParm })
                 </th>
                 <th>
                     @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
@@ -49,48 +48,47 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            <tr class="searchRow">
+                <td  onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
                     @Html.DisplayFor(modelItem => item.FirstName)
                 </td>
-                <td>
+                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
-                <td>
+                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
                     @Html.DisplayFor(modelItem => item.Business)
                 </td>
-                <td>
+                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td>
+                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
                     @Html.DisplayFor(modelItem => item.PhoneNumber)
                 </td>
-                <td>
+                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
                     @{
                         string NotificationTypeName;
                     }
 
                     @switch (item.NotificationType)
-                {
+                     {
                     case 1:
-                        NotificationTypeName = "Sms";
-                        break;
-                    case 2:
                         NotificationTypeName = "Email";
                         break;
+                    case 2:
+                        NotificationTypeName = "Sms";
+                        break;
                     case 3:
-                        NotificationTypeName = "Sms & Email";
+                        NotificationTypeName = "Email & Sms";
                         break;
                     default:
                         NotificationTypeName = "-";
                         break;
-                }
+                     }
 
                     @NotificationTypeName
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.ContactID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ContactID }) |
                     <div id="ContactDeleteBtn" >
                         @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
                         {
@@ -107,7 +105,7 @@
                                             <h4 class="modal-title" id="myModalLabel">Confirm Delete </h4>
                                         </div>
                                         <div class="modal-body">
-                                            Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b></span>
+                                            Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b> ?</span>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
