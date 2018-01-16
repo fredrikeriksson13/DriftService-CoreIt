@@ -155,22 +155,11 @@ namespace DriftService.Controllers
                         contactViewModel.NotificationType = 3;
                     }
 
-                    Contact contact = new Contact
-                    {
-                        FirstName = contactViewModel.FirstName,
-                        LastName = contactViewModel.LastName,
-                        Business = contactViewModel.Business,
-                        Email = contactViewModel.Email,
-                        PhoneNumber = contactViewModel.PhoneNumber,
-                        NotificationType = contactViewModel.NotificationType,
-                        ContactGuid = Guid.NewGuid(),
-                    };
-
                     int ID;
-                    if(db.Contacts.Count() != 0) //Gets and sets Contacts ID
+                    if (db.Contacts.Count() != 0) //Gets and sets Contacts ID
                     {
                         ID = (from c in db.Contacts
-                                  select c.ContactID).Max() + 1;
+                              select c.ContactID).Max() + 1;
                     }
                     else // Resets Contact identity 
                     {
@@ -186,6 +175,18 @@ namespace DriftService.Controllers
                         contactServiceType.ServiceTypeID = i;
                         db.ContactServiceTypes.Add(contactServiceType);
                     }
+
+                    Contact contact = new Contact
+                    {
+                        FirstName = contactViewModel.FirstName,
+                        LastName = contactViewModel.LastName,
+                        Business = contactViewModel.Business,
+                        Email = contactViewModel.Email,
+                        PhoneNumber = contactViewModel.PhoneNumber,
+                        NotificationType = contactViewModel.NotificationType,
+                        ContactGuid = Guid.NewGuid(),
+                        ContactID = ID,
+                    };
 
                     db.Contacts.Add(contact);
                     db.SaveChanges();
