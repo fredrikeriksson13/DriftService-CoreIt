@@ -12,7 +12,7 @@ namespace DriftService.Models
         [Display(Name = "Headline")]
         public string HeadLine { get; set; }
         public string Text { get; set; }
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
         public string SelectedServiceType { get; set; }
