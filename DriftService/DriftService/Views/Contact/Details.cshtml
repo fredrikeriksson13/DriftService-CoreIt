@@ -1,6 +1,10 @@
 ﻿@model DriftService.Models.ContactViewModel
 <link rel="stylesheet" href="~/Content/StyleSheet.css" />
 
+@{
+    ViewBag.Title = "Contact details";
+}
+
 <div class="banner">
     <div class="banner-content">
         <h2><b>Contact details</b></h2>
@@ -73,7 +77,7 @@
             }
         </dd>
         <dt class="Margin-top-20">
-            Servicetype
+            Service type
         </dt>
         <dd class="Margin-top-20">
             @foreach (var item in Model.ServiceTypeList)
