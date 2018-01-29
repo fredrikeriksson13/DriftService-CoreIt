@@ -92,29 +92,29 @@
                     <div id="ContactDeleteBtn" >
                         @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
                         {
-                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"
+                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#@item.ContactID"
                                     data-whatever="@item.ContactID">
                                 Delete
                             </button>
                     <!-- Modal -->
-                            <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog modal-sm" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">Confirm Delete </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b> ?</span>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <input type="submit" value="Delete" class="btn btn-danger" />
-                                        </div>
-                                    </div>
+                    <div class="modal fade" id="@item.ContactID" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Confirm Delete </h4>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b> ?</span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <input type="submit" value="Delete" class="btn btn-danger" />
                                 </div>
                             </div>
-                        }
+                        </div>
+                    </div>
+                 }
                     </div>
                 </td>
             </tr>
