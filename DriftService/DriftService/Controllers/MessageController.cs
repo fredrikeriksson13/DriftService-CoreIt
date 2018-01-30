@@ -113,7 +113,7 @@ namespace DriftService.Controllers
 
                 string HeadtextSize = "'font-size:100%';";
                 string unregisterstyle = "'font-size:75%';";
-                string singnatur = "<p><em>Hälsningar: CoreIT Driftservice-Notifikation<br/>Telefon: 00000222222<br/>Mail: CoreIT@xxx.ru<em></p>";
+                string singnatur = "<p><em>Hälsningar: CoreIT Driftservice-Notifikation<br/>Telefon:  0660-729 99<br/>Mail: info@coreit.se<em></p>";
 
                 string queryString = System.Configuration.ConfigurationManager.AppSettings["UnregisterLink"].ToString() + i.ContactGuid.ToString();
                 string unregiserLink = "<a href='" + queryString + "'>";
