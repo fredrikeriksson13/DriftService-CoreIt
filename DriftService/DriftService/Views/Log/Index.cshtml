@@ -17,7 +17,7 @@
           @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
           {
             <div class="form-group col-sm-6">
-                @Html.TextBox("SearchString", null, new { placeholder = " Enter name..." })
+                @Html.TextBox("SearchString", null, new { placeholder = " Enter name...", id = "searchString" })
                 @Html.TextBox("SearchDate", null, new { placeholder = ViewBag.SelectedDate, id = "datepicker" })
                 <button type="submit" value="Search" id="SearchBtn" class="glyphicon glyphicon-search btn-sm btn-default"></button>
             </div>

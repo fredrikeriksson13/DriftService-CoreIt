@@ -22,39 +22,42 @@ namespace DriftService.Views.Contact
             List<Log> ListAfterSearch = new List<Log>();
             List<Log> ListForRemoveBasisDate = new List<Log>();
 
-            if (!string.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString) || (!string.IsNullOrEmpty(searchDate)))
             {
-                foreach (var i in ListOfLogs)
+                if (!string.IsNullOrEmpty(searchString))
                 {
-                    if ((i.Text.ToLower().Contains(searchString.ToLower()) || i.HeadLine.ToLower().Contains(searchString.ToLower())) && (!ListAfterSearch.Any(x => x == i)))
+                    foreach (var i in ListOfLogs)
                     {
-                        ListAfterSearch.Add(i);
+                        if ((i.Text.ToLower().Contains(searchString.ToLower()) || i.HeadLine.ToLower().Contains(searchString.ToLower())) && (!ListAfterSearch.Any(x => x == i)))
+                        {
+                            ListAfterSearch.Add(i);
+                        }
                     }
+                    ListOfLogs = ListAfterSearch;
                 }
-                ListOfLogs = ListAfterSearch;
+
+                if (!string.IsNullOrEmpty(searchDate))
+                {
+                    DateTime SelectedDate = Convert.ToDateTime(searchDate).AddDays(1);
+                    DateTime TwoWeeksBefore = SelectedDate.AddDays(-14);
+                    foreach (var i in ListOfLogs)
+                    {
+                        if (i.Date > SelectedDate || i.Date < TwoWeeksBefore)
+                        {
+                            ListForRemoveBasisDate.Add(i);
+                        }
+                    }
+
+                    foreach (var i in ListForRemoveBasisDate)
+                    {
+                        ListOfLogs.Remove(i);
+                    }
+
+                    ViewBag.SelectedDate = searchDate;
+                }
                 return View(ListOfLogs.OrderByDescending(o => o.Date).ToList());
             }
 
-            if (!string.IsNullOrEmpty(searchDate))
-            {
-                DateTime SelectedDate = Convert.ToDateTime(searchDate).AddDays(1);
-                DateTime TwoWeeksBefore = SelectedDate.AddDays(-14);
-                foreach (var i in ListOfLogs)
-                {
-                    if(i.Date > SelectedDate || i.Date < TwoWeeksBefore)
-                    {
-                        ListForRemoveBasisDate.Add(i);
-                    }
-                }
-
-                foreach (var i in ListForRemoveBasisDate)
-                {
-                    ListOfLogs.Remove(i);
-                }
-
-                ViewBag.SelectedDate = searchDate;
-                return View(ListOfLogs.OrderByDescending(o => o.Date).ToList());
-            }
             else if(string.IsNullOrEmpty(searchDate))
             {
                 ViewBag.SelectedDate = " Enter date...";
