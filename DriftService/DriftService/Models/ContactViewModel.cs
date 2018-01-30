@@ -30,7 +30,7 @@ namespace DriftService.Models
 
         [StringLength(20, ErrorMessage = "Phone number cannot be longer than 20 characters.")]
         [Required(ErrorMessage = "Please enter phone number.")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Phone number must be numeric")]
+        [RegularExpression(@"^\+[0-9]*$", ErrorMessage = "Phone number must start with dialling code (Ex. +46), and be numeric")]
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
         [Display(Name = "Notification type")]

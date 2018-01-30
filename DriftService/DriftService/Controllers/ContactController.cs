@@ -93,6 +93,7 @@ namespace DriftService.Controllers
         {
            ContactViewModel ContactViewModel = new ContactViewModel();
            ContactViewModel.ServiceTypeList = db.ServiceTypes.ToList();
+           ContactViewModel.PhoneNumber = "+46";
 
             if(ContactViewModel == null)
             {
