@@ -1,5 +1,5 @@
 ﻿thead tr a {
-    color: #f90000;
+    color: #9e0000;
 }
 
 .searchRow:hover {
@@ -17,24 +17,24 @@
 thead tr th:nth-child(1) {
     border-radius: 0.6em 0 0 0.6em;
     background-color: #999;
-    color:red;
-    
+   
 }
 
 thead tr th:nth-child(2) {
     border-radius: 0 0 0 0;
     background-color: #999;
-    color: red;
+   
 }
 thead tr th:nth-child(3) {
     border-radius: 0 0 0 0;
     background-color: #999;
-    color: red;
+    
 }
 thead tr th:nth-child(4) {
     border-radius: 0 0 0 0;
     background-color: #999;
     color: black;
+    
 }
 thead tr th:nth-child(5) {
     border-radius: 0 0 0 0;

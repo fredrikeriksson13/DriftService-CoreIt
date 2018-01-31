@@ -92,7 +92,7 @@
                     @NotificationTypeName
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ContactID }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ContactID }) 
                     <div id="ContactDeleteBtn" >
                         @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
                         {

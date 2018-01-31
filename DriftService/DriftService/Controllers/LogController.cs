@@ -10,9 +10,9 @@ namespace DriftService.Views.Contact
 {
     public class LogController : Controller
     {
-        DriftContext db = new DriftContext();
-        List<Log> ListOfLogs = new List<Log>();
-        string StringForParsing = "";
+       private DriftContext db = new DriftContext();
+       private List<Log> ListOfLogs = new List<Log>();
+       private string StringForParsing = "";
 
         // GET: Log
         public ActionResult Index(string searchString, string searchDate)
