@@ -149,13 +149,12 @@ namespace DriftService.Controllers
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(string.Format("{0}:{1}", user, pwd))));
 
                     var content = new FormUrlEncodedContent(new[] {
-                    new KeyValuePair < string, string > ("from", "Drift"), //Syns som avsändare måste vara kortare än 11chars
+                    new KeyValuePair < string, string > ("from", "CoreIT"),
                     new KeyValuePair < string, string > ("to", i.PhoneNumber), //mottagare sätta +46 som fast?
-                    new KeyValuePair < string, string > ("message", model.Subject + ": " + model.Message + " Mvh Driftservice"),
+                    new KeyValuePair < string, string > ("message", model.Subject + ": " + model.Message),
                     });
 
                     HttpResponseMessage response = await client.PostAsync("/a1/SMS", content);
-                    //response.EnsureSuccessStatusCode();
                     var result = await response.Content.ReadAsStringAsync();
                 }  
             }
