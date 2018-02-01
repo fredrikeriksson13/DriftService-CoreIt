@@ -20,6 +20,7 @@ namespace DriftService.Models
         public string PhoneNumber { get; set; }
         [Display(Name = "Notification type")]
         public int NotificationType { get; set; }
+        public DateTime RegDate { get; set; }
 
         public virtual ICollection<ContactServiceType> ContactServiceType { get; set; }
     }

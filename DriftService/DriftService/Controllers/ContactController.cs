@@ -109,7 +109,7 @@ namespace DriftService.Controllers
         {
             try
             {
-                if (!ModelState.IsValid || (db.Contacts.Any(x => x.Email == contactViewModel.Email)) || (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber)) || (SelectedServiceType == null) || (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false))//ha alla vilkor for icke-Godkänd
+                if (!ModelState.IsValid || (db.Contacts.Any(x => x.Email == contactViewModel.Email)) || (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber))  || (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false))//ha alla vilkor for icke-Godkänd
                 {
                     contactViewModel.ServiceTypeList = db.ServiceTypes.ToList();
                     contactViewModel.SelectedSms = contactViewModel.SelectedSms;
@@ -123,17 +123,17 @@ namespace DriftService.Controllers
                     {
                         ModelState.AddModelError("PhoneNumber", "PhoneNumber already exists.");
                     }
-                    if (SelectedServiceType == null)
-                    {
-                        ViewBag.ErrorMessageServiceType = "Atlest one servicetype must be selected.";
-                    }
+                    //if (SelectedServiceType == null)
+                    //{
+                    //    ViewBag.ErrorMessageServiceType = "Atlest one servicetype must be selected.";
+                    //}
                     if(contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false)
                     {
                         ViewBag.ErrorMessageNotificationType = "Atlest one Notificationtype must be selected.";
                     }
                     //If Something dosent validate, return error And selected values
 
-                    if(SelectedServiceType != null)
+                    if (SelectedServiceType != null)
                     {
                         contactViewModel.SelectedServiceTypeList = SelectedServiceType.ToList();
                     }
@@ -169,13 +169,19 @@ namespace DriftService.Controllers
                         ID = 0;
                     }
 
-                    foreach (var i in SelectedServiceType) //kolla om detta kan sparas i contact obj direkt
+                      if(SelectedServiceType != null)
                     {
-                        ContactServiceType contactServiceType = new ContactServiceType();
-                        contactServiceType.ContactID = ID;
-                        contactServiceType.ServiceTypeID = i;
-                        db.ContactServiceTypes.Add(contactServiceType);
+                        foreach (var i in SelectedServiceType) //kolla om detta kan sparas i contact obj direkt
+                        {
+                            ContactServiceType contactServiceType = new ContactServiceType();
+                            contactServiceType.ContactID = ID;
+                            contactServiceType.ServiceTypeID = i;
+                            db.ContactServiceTypes.Add(contactServiceType);
+                        }
                     }
+                       
+                   
+                    
 
                     Contact contact = new Contact
                     {
@@ -186,6 +192,7 @@ namespace DriftService.Controllers
                         PhoneNumber = contactViewModel.PhoneNumber,
                         NotificationType = contactViewModel.NotificationType,
                         ContactGuid = Guid.NewGuid(),
+                        RegDate = DateTime.Now,
                         ContactID = ID,
                     };
 
@@ -261,20 +268,30 @@ namespace DriftService.Controllers
         {
             try
             {
-                if (SelectedServiceType == null || (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false))
+                if (!ModelState.IsValid || (db.Contacts.Any(x => x.Email == contactViewModel.Email && x.ContactID != contactViewModel.ContactID)) || (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber && x.ContactID != contactViewModel.ContactID)) || (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false))
                 {
                     contactViewModel.SelectedSms = contactViewModel.SelectedSms;
                     contactViewModel.SelectedEmail = contactViewModel.SelectedEmail;
                     contactViewModel.ServiceTypeList = db.ServiceTypes.ToList();
 
-                    if (SelectedServiceType == null)
+                    if (db.Contacts.Any(x => x.Email == contactViewModel.Email && x.ContactID != contactViewModel.ContactID))
                     {
-                        ViewBag.ErrorMessageServiceType = "Atlest one servicetype must be selected.";
+                        ModelState.AddModelError("Email", "Email already exists.");
                     }
+                    if (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber && x.ContactID != contactViewModel.ContactID))
+                    {
+                        ModelState.AddModelError("PhoneNumber", "PhoneNumber already exists.");
+                    }
+                    //if (SelectedServiceType == null)
+                    //{
+                    //    ViewBag.ErrorMessageServiceType = "Atlest one servicetype must be selected.";
+                    //}
                     if (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false)
                     {
                         ViewBag.ErrorMessageNotificationType = "Atlest one Notificationtype must be selected.";
                     }
+                    //If Something dosent validate, return error And selected values
+
                     if (SelectedServiceType != null)
                     {
                         contactViewModel.SelectedServiceTypeList = SelectedServiceType.ToList();
@@ -297,15 +314,19 @@ namespace DriftService.Controllers
                         contactViewModel.NotificationType = 3;
                     }
 
+
                     //Removes the selected customers ContactServices
                     db.ContactServiceTypes.RemoveRange(db.ContactServiceTypes.Where(x => x.ContactID == contactViewModel.ContactID));
-
-                    //Add a new Set of ContactServices
-                    foreach (var i in SelectedServiceType)
+                    if (SelectedServiceType != null)
                     {
-                      ContactServiceType cst = new ContactServiceType { ContactID = contactViewModel.ContactID, ServiceTypeID = i };
-                      db.ContactServiceTypes.Add(cst);
+                        //Add a new Set of ContactServices
+                        foreach (var i in SelectedServiceType)
+                        {
+                            ContactServiceType cst = new ContactServiceType { ContactID = contactViewModel.ContactID, ServiceTypeID = i };
+                            db.ContactServiceTypes.Add(cst);
+                        }
                     }
+                   
 
                     Contact contact = new Contact
                     {
@@ -319,6 +340,8 @@ namespace DriftService.Controllers
                     };
 
                     db.Entry(contact).State = EntityState.Modified;
+                    db.Entry(contact).Property(x => x.RegDate).IsModified = false;
+                    db.Entry(contact).Property(x => x.ContactGuid).IsModified = false;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
