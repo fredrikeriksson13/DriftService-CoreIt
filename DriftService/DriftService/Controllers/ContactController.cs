@@ -13,45 +13,80 @@ namespace DriftService.Controllers
     public class ContactController : Controller
     {
         // GET: Contact
-        DriftContext db = new DriftContext();
+        private DriftContext db = new DriftContext();
+        private List<ContactViewModel> contactViewModelTempList = new List<ContactViewModel>();
+        private List<ContactViewModel> contactViewModeToRemove = new List<ContactViewModel>();
 
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchString, int[] SelectedServiceType)
         {
             ViewBag.FirstNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_FirstName" : "";
             ViewBag.LastNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_LastName" : "";
             ViewBag.CompanyNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Company_LastName" : "";
-          
-            var Contacts = (from s in db.Contacts
-                            select s);
 
-            if (Contacts == null)
+            foreach (var i in db.Contacts)
             {
-                return HttpNotFound();
-            }
+                ContactViewModel contactViewModel = new ContactViewModel
+                {
+                    ContactID = i.ContactID,
+                    FirstName = i.FirstName,
+                    LastName = i.LastName,
+                    Email = i.Email,
+                    PhoneNumber = i.PhoneNumber,
+                    Business = i.Business,
+                    NotificationType = i.NotificationType,
+                    ContactServiceTypeList = (from c in db.ContactServiceTypes where c.ContactID == i.ContactID select c).ToList(), 
+                };
 
+                contactViewModelTempList.Add(contactViewModel);
+            }
+           
             if (!string.IsNullOrEmpty(searchString))
             {
-                Contacts = Contacts.Where(s => s.FirstName.Contains(searchString)
-                                       || s.LastName.Contains(searchString) || s.Business.Contains(searchString));
+                contactViewModelTempList.Where(s => s.FirstName.Contains(searchString)
+                                                  || s.LastName.Contains(searchString) 
+                                                  || s.Business.Contains(searchString));
+            }
+            //Kolla över denna
+            if(SelectedServiceType != null)
+            {
+                foreach(var s in SelectedServiceType)
+                {
+                    foreach(var c in contactViewModelTempList)
+                    {
+                        if (db.ContactServiceTypes.Any(x => x.ContactID == c.ContactID && x.ServiceTypeID == s))
+                        {
+                            contactViewModeToRemove.Add(c);
+                        }
+                    }
+                }
+                contactViewModelTempList = contactViewModeToRemove;
             }
 
             switch (sortOrder)
             {
                 case "Contacts_FirstName":
-                    Contacts = Contacts.OrderBy(s => s.FirstName);
+                    contactViewModelTempList = (from x in contactViewModelTempList orderby x.FirstName select x).ToList();
                     break;
                 case "Contacts_LastName":
-                    Contacts = Contacts.OrderBy(s => s.LastName);
+                    contactViewModelTempList = (from x in contactViewModelTempList orderby x.LastName select x).ToList();
                     break;
                 case "Company_LastName":
-                    Contacts = Contacts.OrderBy(s => s.Business);
+                    contactViewModelTempList = (from x in contactViewModelTempList orderby x.Business select x).ToList();
                     break;
                 default:
-                    Contacts = Contacts.OrderByDescending(s => s.ContactID);
+                    contactViewModelTempList = (from x in contactViewModelTempList orderby x.ContactID descending select x).ToList();
                     break;
             }
+            ContactViewModelList contactViewModelList = new ContactViewModelList();
+            contactViewModelList.contactViewModels = contactViewModelTempList;
+            contactViewModelList.ServiceTypes = db.ServiceTypes.ToList();
 
-            return View(Contacts.ToList());
+            if (contactViewModelList == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(contactViewModelList);
         }
 
         // GET: Contact/Details/5

@@ -114,3 +114,16 @@ footer {
     text-align: right;
     vertical-align: top;
 }
+
+.Float-Left {
+   float:left;
+}
+
+.Vertical-Aligin-Center{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.margin-10px{
+    margin:10px;
+}

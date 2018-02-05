@@ -160,6 +160,7 @@
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\ContactServiceType.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
+    <Compile Include="Models\ContactViewModelList.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Models\MessageViewModel.cs" />
     <Compile Include="Models\ServiceType.cs" />
