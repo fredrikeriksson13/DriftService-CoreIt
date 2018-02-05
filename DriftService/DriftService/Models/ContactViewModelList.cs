@@ -9,5 +9,6 @@ namespace DriftService.Models
     {
         public List<ContactViewModel> contactViewModels { get; set; }
         public List<ServiceType> ServiceTypes { get; set; }
+        public List<int> SelectedServiceTypeList { get; set; }
     }
 }

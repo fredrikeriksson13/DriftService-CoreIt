@@ -13,7 +13,7 @@
 </div>
 
 
-
+ @{bool MatchingID = false; }
 
 <div class="form-horizontal">
     @using (Html.BeginForm())
@@ -28,13 +28,26 @@
 
         foreach (var item in Model.ServiceTypes)
         {
+            if (Model.SelectedServiceTypeList != null)
+            {
+              
+                    if (Model.SelectedServiceTypeList.Any(x => x == item.ServiceTypeID))
+                    {
+                        MatchingID = true;
+                    }
+                    else
+                    {
+                        MatchingID = false;
+                    }
+                
+            }
 
             <div class="Float-Left margin-10px">
                 <div class="Vertical-Aligin-Center">
-                    <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="chkServiceType" />
+                    <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="@item.ServiceTypeID" checked="@MatchingID" />
                 </div>
                 <div class="Vertical-Aligin-Center">
-                    <label for="chkServiceType">@item.Description</label>
+                    <label for="@item.ServiceTypeID">@item.Description</label>
                 </div>
             </div>
         }
