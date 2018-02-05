@@ -15,13 +15,11 @@ namespace DriftService.Controllers
         // GET: Contact
         private DriftContext db = new DriftContext();
         private List<ContactViewModel> contactViewModelTempList = new List<ContactViewModel>();
-        private List<ContactViewModel> contactViewModeToRemove = new List<ContactViewModel>();
+        private List<ContactViewModel> contactsWithMatchingServiceType = new List<ContactViewModel>();
 
         public ActionResult Index(string sortOrder, string searchString, int[] SelectedServiceType)
         {
-            ViewBag.FirstNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_FirstName" : "";
-            ViewBag.LastNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_LastName" : "";
-            ViewBag.CompanyNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Company_LastName" : "";
+           
 
             foreach (var i in db.Contacts)
             {
@@ -39,44 +37,60 @@ namespace DriftService.Controllers
 
                 contactViewModelTempList.Add(contactViewModel);
             }
-           
-            if (!string.IsNullOrEmpty(searchString))
+            if (SelectedServiceType != null)
             {
-                contactViewModelTempList.Where(s => s.FirstName.Contains(searchString)
-                                                  || s.LastName.Contains(searchString) 
-                                                  || s.Business.Contains(searchString));
-            }
-            //Kolla över denna
-            if(SelectedServiceType != null)
-            {
-                foreach(var s in SelectedServiceType)
+                foreach (var s in SelectedServiceType)
                 {
-                    foreach(var c in contactViewModelTempList)
+                    foreach (var c in contactViewModelTempList)
                     {
-                        if (db.ContactServiceTypes.Any(x => x.ContactID == c.ContactID && x.ServiceTypeID == s))
+                        if (db.ContactServiceTypes.Any(x => x.ContactID.Equals(c.ContactID) && x.ServiceTypeID.Equals(s)))
                         {
-                            contactViewModeToRemove.Add(c);
+                            contactsWithMatchingServiceType.Add(c);
+                        }
+                        else if((s == 0) && !db.ContactServiceTypes.Any(x => x.ContactID.Equals(c.ContactID)))
+                        {
+                        
+                            contactsWithMatchingServiceType.Add(c);
                         }
                     }
                 }
-                contactViewModelTempList = contactViewModeToRemove;
+                contactViewModelTempList = contactsWithMatchingServiceType;
             }
 
-            switch (sortOrder)
+
+            if (!string.IsNullOrEmpty(searchString))
             {
-                case "Contacts_FirstName":
-                    contactViewModelTempList = (from x in contactViewModelTempList orderby x.FirstName select x).ToList();
-                    break;
-                case "Contacts_LastName":
-                    contactViewModelTempList = (from x in contactViewModelTempList orderby x.LastName select x).ToList();
-                    break;
-                case "Company_LastName":
-                    contactViewModelTempList = (from x in contactViewModelTempList orderby x.Business select x).ToList();
-                    break;
-                default:
-                    contactViewModelTempList = (from x in contactViewModelTempList orderby x.ContactID descending select x).ToList();
-                    break;
+               
+                contactViewModelTempList = (from c in contactViewModelTempList
+                                            where c.FirstName.ToLower().StartsWith(searchString.ToLower())
+                                            || c.LastName.ToLower().StartsWith(searchString.ToLower())
+                                            || c.Business.ToLower().StartsWith(searchString.ToLower())
+                                            select c).ToList();
             }
+
+            ViewBag.FirstNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_FirstName" : "";
+            ViewBag.LastNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_LastName" : "";
+            ViewBag.CompanyNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Company_LastName" : "";
+
+            if (sortOrder != null)
+            {
+                switch (sortOrder)
+                {
+                    case "Contacts_FirstName":
+                        contactViewModelTempList = (from x in contactViewModelTempList orderby x.FirstName select x).ToList();
+                        break;
+                    case "Contacts_LastName":
+                        contactViewModelTempList = (from x in contactViewModelTempList orderby x.LastName select x).ToList();
+                        break;
+                    case "Company_LastName":
+                        contactViewModelTempList = (from x in contactViewModelTempList orderby x.Business select x).ToList();
+                        break;
+                    default:
+                        contactViewModelTempList = (from x in contactViewModelTempList orderby x.ContactID descending select x).ToList();
+                        break;
+                }
+            }
+            
             ContactViewModelList contactViewModelList = new ContactViewModelList();
             contactViewModelList.contactViewModels = contactViewModelTempList;
             contactViewModelList.ServiceTypes = db.ServiceTypes.ToList();
