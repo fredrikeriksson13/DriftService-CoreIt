@@ -136,6 +136,7 @@ namespace DriftService.Controllers
                 LastName = contact.LastName,
                 Business = contact.Business,
                 Email = contact.Email,
+                RegDate = contact.RegDate,
                 NotificationType = contact.NotificationType,
                 PhoneNumber = contact.PhoneNumber,
                 ServiceTypeList = db.ServiceTypes.ToList(),

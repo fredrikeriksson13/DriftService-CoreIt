@@ -16,7 +16,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.FirstName) :
         </dt>
 
         <dd>
@@ -24,7 +24,7 @@
         </dd>
 
         <dt class="Margin-top-20">
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.LastName) :
         </dt>
 
         <dd class="Margin-top-20">
@@ -32,7 +32,7 @@
         </dd>
 
         <dt class="Margin-top-20">
-            @Html.DisplayNameFor(model => model.Business)
+            @Html.DisplayNameFor(model => model.Business) :
         </dt>
 
         <dd class="Margin-top-20">
@@ -40,7 +40,15 @@
         </dd>
 
         <dt class="Margin-top-20">
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.RegDate) :
+        </dt>
+
+        <dd class="Margin-top-20">
+            @Html.DisplayFor(model => model.RegDate)
+        </dd>
+
+        <dt class="Margin-top-20">
+            @Html.DisplayNameFor(model => model.Email) :
         </dt>
 
         <dd class="Margin-top-20">
@@ -48,7 +56,7 @@
         </dd>
 
         <dt class="Margin-top-20">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayNameFor(model => model.PhoneNumber) :
         </dt>
 
         <dd class="Margin-top-20">
@@ -56,37 +64,37 @@
         </dd>
 
         <dt class="Margin-top-20">
-            @Html.DisplayNameFor(model => model.NotificationType)
+            @Html.DisplayNameFor(model => model.NotificationType) :
         </dt>
 
         <dd class="Margin-top-20">
             @switch (Model.NotificationType)
-            {
-                case 0:
-                    <p>-</p>
-                    break;
-                case 1:
-                    <p>Email</p>
-                    break;
-                case 2:
-                    <p>SMS</p>
-                    break;
-                case 3:
-                    <p>SMS & Email</p>
-                    break;
-            }
+             {
+            case 0:
+                <p>-</p>
+            break;
+            case 1:
+            <p>Email</p>
+            break;
+            case 2:
+            <p>SMS</p>
+            break;
+            case 3:
+            <p>SMS & Email</p>
+            break;
+             }
         </dd>
         <dt class="Margin-top-20">
-            Service type
+            Service type :
         </dt>
         <dd class="Margin-top-20">
             @foreach (var item in Model.ServiceTypeList)
+        {
+            if (Model.ContactServiceTypeList.Any(x => x.ServiceTypeID == item.ServiceTypeID))
             {
-                if (Model.ContactServiceTypeList.Any(x => x.ServiceTypeID == item.ServiceTypeID))
-                {
-                    <p for="@item.Description">@item.Description</p>
-                }
-            }
+                <p for="@item.Description">@item.Description</p>
+        }
+    }
         </dd>
     </dl>
   </div>
