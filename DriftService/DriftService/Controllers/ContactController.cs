@@ -31,6 +31,7 @@ namespace DriftService.Controllers
                     Email = i.Email,
                     PhoneNumber = i.PhoneNumber,
                     Business = i.Business,
+                    RegDate = i.RegDate,
                     NotificationType = i.NotificationType,
                     ContactServiceTypeList = (from c in db.ContactServiceTypes where c.ContactID == i.ContactID select c).ToList(), 
                 };
@@ -71,6 +72,7 @@ namespace DriftService.Controllers
             ViewBag.FirstNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_FirstName" : "";
             ViewBag.LastNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_LastName" : "";
             ViewBag.CompanyNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Company_LastName" : "";
+            ViewBag.RegisteredSortParm = string.IsNullOrEmpty(sortOrder) ? "Register_Date" : "";
 
             if (sortOrder != null)
             {
@@ -84,6 +86,9 @@ namespace DriftService.Controllers
                         break;
                     case "Company_LastName":
                         contactViewModelTempList = (from x in contactViewModelTempList orderby x.Business select x).ToList();
+                        break;
+                    case "Register_Date":
+                        contactViewModelTempList = (from x in contactViewModelTempList orderby x.RegDate descending select x).ToList();
                         break;
                     default:
                         contactViewModelTempList = (from x in contactViewModelTempList orderby x.ContactID descending select x).ToList();
@@ -222,7 +227,7 @@ namespace DriftService.Controllers
                     }
 
                       if(SelectedServiceType != null)
-                    {
+                      {
                         foreach (var i in SelectedServiceType) //kolla om detta kan sparas i contact obj direkt
                         {
                             ContactServiceType contactServiceType = new ContactServiceType();
@@ -230,11 +235,7 @@ namespace DriftService.Controllers
                             contactServiceType.ServiceTypeID = i;
                             db.ContactServiceTypes.Add(contactServiceType);
                         }
-                    }
-                       
-                   
-                    
-
+                      }
                     Contact contact = new Contact
                     {
                         FirstName = contactViewModel.FirstName,

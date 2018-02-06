@@ -92,20 +92,16 @@
                     @Html.ActionLink("Company", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
                 </th>
                 <th>
-
-                    <div class="text-center">
-                        <p><b>First name</b></p>
-                    </div>
-
-                    @*@Html.DisplayNameFor(model => model.contactViewModels.)*@
+                    @Html.ActionLink("Registered", "Index", new { sortOrder = ViewBag.RegisteredSortParm })
                 </th>
                 <th>
-                    <p><b>Phone number</b></p>
-                    @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
+                    @Html.DisplayNameFor(model => model.contactViewModels[0].Email )
                 </th>
                 <th>
-                    <p><b>Notification type</b></p>
-                    @*@Html.DisplayNameFor(model => model.NotificationType)*@
+                    @Html.DisplayNameFor(model => model.contactViewModels[0].PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.contactViewModels[0].NotificationType)
                 </th>
                 <th>
                     @Html.ActionLink("Create New", "Create")
@@ -117,76 +113,79 @@
         @foreach (var item in Model.contactViewModels)
         {
 
-            <tr class="searchRow">
-                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
-                    @Html.DisplayFor(modelItem => item.Business)
-                </td>
-                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
-                    @{
-                        string NotificationTypeName;
-                    }
+        <tr class="searchRow">
+            <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
+                @Html.DisplayFor(modelItem => item.Business)
+            </td>
+            <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
+                @Html.DisplayFor(modelItem => item.RegDate)
+            </td>
+            <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
+                @{
+            string NotificationTypeName;
+                }
 
-                    @switch (item.NotificationType)
-                    {
-                        case 1:
-                            NotificationTypeName = "Email";
-                            break;
-                        case 2:
-                            NotificationTypeName = "Sms";
-                            break;
-                        case 3:
-                            NotificationTypeName = "Email & Sms";
-                            break;
-                        default:
-                            NotificationTypeName = "-";
-                            break;
-                    }
+                @switch (item.NotificationType)
+        {
+            case 1:
+                NotificationTypeName = "Email";
+                break;
+            case 2:
+                NotificationTypeName = "Sms";
+                break;
+            case 3:
+                NotificationTypeName = "Email & Sms";
+                break;
+            default:
+                NotificationTypeName = "-";
+                break;
+        }
 
-                    @NotificationTypeName
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ContactID })
-                    <div id="ContactDeleteBtn">
-                        @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
-                        {
-                            <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#@item.ContactID"
-                                    data-whatever="@item.ContactID">
-                                Delete
-                            </button>
-                            <!-- Modal -->
-                            <div class="modal fade" id="@item.ContactID" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog modal-sm" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">Confirm Delete </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b> ?</span>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            <input type="submit" value="Delete" class="btn btn-danger" />
-                                        </div>
-                                    </div>
-                                </div>
+                @NotificationTypeName
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ContactID })
+                <div id="ContactDeleteBtn">
+                    @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
+            {
+                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#@item.ContactID"
+                        data-whatever="@item.ContactID">
+                    Delete
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="@item.ContactID" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Confirm Delete </h4>
                             </div>
-                        }
+                            <div class="modal-body">
+                                Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b> ?</span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <input type="submit" value="Delete" class="btn btn-danger" />
+                            </div>
+                        </div>
                     </div>
-                </td>
-            </tr>
+                </div>
+    }
+                </div>
+            </td>
+        </tr>
 
         }
     </table>

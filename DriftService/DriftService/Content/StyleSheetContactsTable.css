@@ -10,14 +10,13 @@
    background-color: #4286f4;
 }
 
-.searchRow:hover td:nth-child(7) {
+.searchRow:hover td:nth-child(8) {
     background-color: white;
 }
 
 thead tr th:nth-child(1) {
     border-radius: 0.6em 0 0 0.6em;
     background-color: #999;
-   
 }
 
 thead tr th:nth-child(2) {
@@ -42,6 +41,11 @@ thead tr th:nth-child(5) {
     color: black;
 }
 thead tr th:nth-child(6) {
+    border-radius: 0 0 0 0;
+    background-color: #999;
+    color: black;
+}
+thead tr th:nth-child(7) {
     border-radius: 0 0.6em 0.6em 0;
     background-color: #999;
     color: black;
@@ -75,6 +79,11 @@ tbody td:nth-child(5) /* This is now the middle element out of three */ {
     color: white;
 }
 tbody td:nth-child(6) /* This is now the middle element out of three */ {
+    border-radius: 0 0 0 0;
+    background: #181818;
+    color: white;
+}
+tbody td:nth-child(7) /* This is now the middle element out of three */ {
     border-radius: 0 0.6em 0.6em 0;
     background: #181818;
     color: white;
