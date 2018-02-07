@@ -77,9 +77,9 @@
 
 
 <div>
-    <table class="table">
+    <table class="table" id="ContactTable">
         <thead>
-            <tr>
+            <tr >
                 <th>
                     @Html.ActionLink("First name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
                 </th>
@@ -110,8 +110,8 @@
 
         @foreach (var item in Model.contactViewModels)
         {
-
-        <tr class="searchRow">
+            
+        <tr class="searchRow" id="@item.ContactID" >
             <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -154,6 +154,7 @@
                 @NotificationTypeName
             </td>
             <td>
+                <button class="btn-warning btn-xs" onclick="EditRow(@item.ContactID)">Edit </button>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ContactID })
                 <div id="ContactDeleteBtn">
                     @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
@@ -189,3 +190,6 @@
     </table>
 
 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="~/Scripts/EditRow.js"></script>
