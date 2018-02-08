@@ -14,6 +14,8 @@ namespace DriftService.Models
 
         public string Description { get; set; }
 
+        public bool PublicServiceType { get; set; }
+
         public virtual ICollection<ContactServiceType> ContactServiceType { get; set; }
     }
 }
