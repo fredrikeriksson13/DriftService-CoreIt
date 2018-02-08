@@ -31,7 +31,7 @@ namespace DriftService.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-           messageViewModel.Subject = "Driftsinformation! / Operational Information!";
+           messageViewModel.Subject = "Driftsinformation - CoreIT";
            return View(messageViewModel);
         }
 
@@ -111,23 +111,18 @@ namespace DriftService.Controllers
         {
             foreach (var i in ListOfContactsForMail)
             {
-                var message = new MailMessage();
-                message.To.Add(i.Email);
-
-                string HeadtextSize = "'font-size:100%';";
                 string unregisterstyle = "'font-size:75%';";
-                string singnatur = "<p><em>Hälsningar: CoreIT Driftservice-Notifikation<br/>Telefon:  0660-729 99<br/>Mail: info@coreit.se<em></p>";
-
                 string queryString = System.Configuration.ConfigurationManager.AppSettings["UnregisterLink"].ToString() + i.ContactGuid.ToString();
                 string unregiserLink = "<a href='" + queryString + "'>";
-
-
-                string HeadLine = "<p style=" + HeadtextSize + "><b>Hej " + i.FirstName + "!"+ "</p></b>";
                 string unregister = unregiserLink + "<center><p style=" + unregisterstyle + ">Klicka här för att avregistrera</p></center></a>";
 
-                message.Subject = "Driftservice-Notifikation: " + model.Subject;
-                message.Body = HeadLine + model.Message + "<br/><br/>" + singnatur + unregister;
-            
+                string singnatur = "<p>Servicedesk +46 (0)660-729 99<br/>Mail:    helpit@coreit.se<br/>Webb: www.coreit.se<br/>Postadress: Box 407, 891 28 Örnsköldsvik<br/>Besöksadress: Hörneborgsvägen 11, 892 50 Domsjö</p>"; //infoga bild
+                string forMoreInfo = "<p>Se mera information på/See more information on<br/>http://www.coreit.se/servicefonster</p>";
+
+                var message = new MailMessage();
+                message.To.Add(i.Email);
+                message.Subject = model.Subject;
+                message.Body = model.Message + "<br/><br/>" + forMoreInfo + "<br/><br/>" + singnatur + unregister;
                 message.IsBodyHtml = true;
 
                 using (var smtp = new SmtpClient())
@@ -144,20 +139,20 @@ namespace DriftService.Controllers
                 foreach (var i in ListOfContactsForSMS)
                 {
                     var client = new HttpClient();
-                    client.BaseAddress = new Uri("https://api.46elks.com");
 
+                    var SmsApiAdress = System.Configuration.ConfigurationManager.AppSettings["SmsApiAdress"].ToString();
                     var user = System.Configuration.ConfigurationManager.AppSettings["ApiUser"].ToString();
                     var pwd = System.Configuration.ConfigurationManager.AppSettings["ApiPassword"].ToString();
 
                     client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(string.Format("{0}:{1}", user, pwd))));
 
                     var content = new FormUrlEncodedContent(new[] {
-                    new KeyValuePair < string, string > ("from", "CoreIT"),
-                    new KeyValuePair < string, string > ("to", i.PhoneNumber), 
-                    new KeyValuePair < string, string > ("message", model.Subject + ": " + model.Message + " /Mvh CoreIT"),
+                        new KeyValuePair < string, string > ("from", "CoreIT"),
+                        new KeyValuePair < string, string > ("to", i.PhoneNumber), 
+                        new KeyValuePair < string, string > ("message", model.Subject + ": " + model.Message + " /Mvh CoreIT"),
                     });
 
-                    HttpResponseMessage response = await client.PostAsync("/a1/SMS", content);
+                    HttpResponseMessage response = await client.PostAsync(SmsApiAdress, content);
                     var result = await response.Content.ReadAsStringAsync();
                 }  
             }
