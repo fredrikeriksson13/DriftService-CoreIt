@@ -154,7 +154,7 @@ namespace DriftService.Controllers
                     var content = new FormUrlEncodedContent(new[] {
                     new KeyValuePair < string, string > ("from", "CoreIT"),
                     new KeyValuePair < string, string > ("to", i.PhoneNumber), 
-                    new KeyValuePair < string, string > ("message", model.Subject + ": " + model.Message),
+                    new KeyValuePair < string, string > ("message", model.Subject + ": " + model.Message + " /Mvh CoreIT"),
                     });
 
                     HttpResponseMessage response = await client.PostAsync("/a1/SMS", content);
