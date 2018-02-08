@@ -10,9 +10,9 @@ namespace DriftService.Views.Contact
 {
     public class LogController : Controller
     {
-        DriftContext db = new DriftContext();
-        List<Log> ListOfLogs = new List<Log>();
-        string StringForParsing = "";
+       private DriftContext db = new DriftContext();
+       private List<Log> ListOfLogs = new List<Log>();
+       private string StringForParsing = "";
 
         // GET: Log
         public ActionResult Index(string searchString, string searchDate)
@@ -87,14 +87,18 @@ namespace DriftService.Views.Contact
                 foreach (var ii in SplitedString)
                 {
                     var s = db.ServiceTypes.ToList().Find(x => x.ServiceTypeID.ToString() == ii);
-                    if (string.IsNullOrWhiteSpace(StringForParsing))
+                    if(s != null)
                     {
-                        StringForParsing = s.Description;
+                        if (string.IsNullOrWhiteSpace(StringForParsing))
+                        {
+                            StringForParsing = s.Description;
+                        }
+                        else
+                        {
+                            StringForParsing = StringForParsing + ", " + s.Description;
+                        }
                     }
-                    else
-                    {
-                        StringForParsing = StringForParsing + ", " + s.Description;
-                    }
+                    
                 }
                 i.SelectedServiceType = StringForParsing;
                 ListOfLogs.Add(i);

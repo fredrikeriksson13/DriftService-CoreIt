@@ -21,6 +21,7 @@ namespace DriftService.Models
 
         [StringLength(20, ErrorMessage = "Name cannot be longer than 20 characters.")]
         [Required(ErrorMessage = "Please enter company name.")]
+        [Display(Name = "Company")]
         public string Business { get; set; }
 
         [StringLength(30, ErrorMessage = "Email cannot be longer than 30 characters.")]
@@ -35,6 +36,8 @@ namespace DriftService.Models
         public string PhoneNumber { get; set; }
         [Display(Name = "Notification type")]
         public int NotificationType { get; set; }
+        [Display(Name = "Registered")]
+        public DateTime RegDate { get; set; }
         public List<ServiceType> ServiceTypeList { get; set; }
 
         public List<ContactServiceType> ContactServiceTypeList { get; set; }
