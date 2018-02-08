@@ -31,15 +31,16 @@ namespace DriftService.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+           messageViewModel.Subject = "Driftsinformation! / Operational Information!";
            return View(messageViewModel);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Index(MessageViewModel model, int[] SelectedServiceType)
+        public async Task<ActionResult> Index(MessageViewModel model, int[] SelectedServiceType, bool webChk)
         {
             try
             {
-                if ((ModelState.IsValid) && (SelectedServiceType != null) && (model.SendMail == true || model.SendSms == true))
+                if ((ModelState.IsValid) && (SelectedServiceType != null) && (model.SendMail == true || model.SendSms == true || webChk == true))
                 {
                     foreach (var i in db.Contacts.ToList()) //Sort contacts after choosen servicetype
                     {
@@ -52,31 +53,33 @@ namespace DriftService.Controllers
                         }
                     }
 
-                    if (ListToSend.Count != 0)
+                    if (ListToSend.Count != 0 || webChk != false)
                     {
-                        foreach (var i in ListToSend)
+                        if (ListToSend.Count != 0)
                         {
-                            if ((i.NotificationType == 1 || i.NotificationType == 3) && model.SendMail)
+                            foreach (var i in ListToSend)
                             {
-                                ListOfContactsForMail.Add(i);
+                                if ((i.NotificationType == 1 || i.NotificationType == 3) && model.SendMail)
+                                {
+                                    ListOfContactsForMail.Add(i);
+                                }
+                                if ((i.NotificationType == 2 || i.NotificationType == 3) && model.SendSms)
+                                {
+                                    ListOfContactsForSMS.Add(i);
+                                }
                             }
-                            if ((i.NotificationType == 2 || i.NotificationType == 3) && model.SendSms)
+
+                            if (model.SendMail && (ListOfContactsForMail.Count != 0))
                             {
-                                ListOfContactsForSMS.Add(i);
+                                await SendEmail(model);
+                            }
+                            if (model.SendSms && (ListOfContactsForSMS.Count != 0))
+                            {
+                                await SendSms(model);
                             }
                         }
-
-                        if (model.SendMail && (ListOfContactsForMail.Count != 0))
-                        {
-                            await SendEmail(model);
-                        }
-                        if (model.SendSms && (ListOfContactsForSMS.Count != 0))
-                        {
-                            await SendSms(model);
-                        }
-
-                        SaveMessageToLogg(model, SelectedServiceType);
-                        ViewBag.ConfirmationMessage = "Your message have been send";
+                        SaveMessageToLogg(model, SelectedServiceType, webChk);
+                        ViewBag.ConfirmationMessage = "Your message have been send/published";
                         ModelState.Clear();
                         return View(messageViewModel);
                     }
@@ -87,7 +90,7 @@ namespace DriftService.Controllers
                 {
                     ViewBag.NoServiceTypSelected = "Must select a service type";
                 }
-                if (model.SendMail == false && model.SendSms == false)
+                if (model.SendMail == false && model.SendSms == false && webChk == false)
                 {
                     ViewBag.NoNotificationTypeSelected = "Must select a notification type";
                 }
@@ -150,7 +153,7 @@ namespace DriftService.Controllers
 
                     var content = new FormUrlEncodedContent(new[] {
                     new KeyValuePair < string, string > ("from", "CoreIT"),
-                    new KeyValuePair < string, string > ("to", i.PhoneNumber), //mottagare sätta +46 som fast?
+                    new KeyValuePair < string, string > ("to", i.PhoneNumber), 
                     new KeyValuePair < string, string > ("message", model.Subject + ": " + model.Message),
                     });
 
@@ -164,7 +167,7 @@ namespace DriftService.Controllers
             }
         }
 
-        public void SaveMessageToLogg(MessageViewModel model, int[] selectedServiceType)
+        public void SaveMessageToLogg(MessageViewModel model, int[] selectedServiceType, bool checkResp)
         {
             string s = "";
 
@@ -185,7 +188,8 @@ namespace DriftService.Controllers
                 Date = DateTime.Now,
                 HeadLine = model.Subject,
                 Text = model.Message,
-                SelectedServiceType = s
+                SelectedServiceType = s,
+                Webb = checkResp,
             };
 
             db.Logs.Add(log);

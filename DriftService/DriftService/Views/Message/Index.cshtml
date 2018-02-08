@@ -62,9 +62,11 @@
         <h4><b>Notification type</b></h4>
         <div class="BorderBlack">
             <div class="checkBoxMargin">
-                    @Html.CheckBoxFor(m => m.SendSms)<b>SMS</b><br /><br />
-                    @Html.CheckBoxFor(m => m.SendMail)<b>Email</b>
-                </div>
+                @Html.CheckBoxFor(m => m.SendSms)<b>SMS</b><br/><br/>
+                @Html.CheckBoxFor(m => m.SendMail)<b>Email</b><br/><br/>
+                @Html.CheckBox("webChk")<b>Web</b>
+            </div>
+            @*<input name="checkResp" value="false" type="checkbox" />*@
             </div>
         <div class="text-danger">@ViewBag.NoNotificationTypeSelected</div>
         <div class="text-danger">@ViewBag.NoSubscribersMessage</div>

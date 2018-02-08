@@ -1,9 +1,9 @@
-﻿$(function () {
-    $("#datepicker").datepicker({
-        dateFormat: 'yy-mm-dd',
-        //autoclose: true
-    });
-});
+﻿//$(function () {
+//    $("#datepicker").datepicker({
+//        dateFormat: 'yy-mm-dd',
+//        //autoclose: true
+//    });
+//});
 
 
 
