@@ -111,7 +111,7 @@
         @foreach (var item in Model.contactViewModels)
         {
             
-        <tr class="searchRow" id="@item.ContactID" >
+        <tr class="searchRow">
             <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>

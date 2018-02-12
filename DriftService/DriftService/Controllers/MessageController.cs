@@ -115,8 +115,8 @@ namespace DriftService.Controllers
                 string queryString = System.Configuration.ConfigurationManager.AppSettings["UnregisterLink"].ToString() + i.ContactGuid.ToString();
                 string unregiserLink = "<a href='" + queryString + "'>";
                 string unregister = unregiserLink + "<center><p style=" + unregisterstyle + ">Klicka här för att avregistrera</p></center></a>";
-
-                string singnatur = "<p>Servicedesk +46 (0)660-729 99<br/>Mail:    helpit@coreit.se<br/>Webb: www.coreit.se<br/>Postadress: Box 407, 891 28 Örnsköldsvik<br/>Besöksadress: Hörneborgsvägen 11, 892 50 Domsjö</p>"; //infoga bild
+                string Logga = @"<img src=""https://www.coreit.se/wp-content/uploads/2018/01/Corelogo.png"" alt=""CoreITLogo"" height=""30"" width=""130""/>";
+                string singnatur = "<p>Servicedesk +46 (0)660-729 99<br/>Mail:    helpit@coreit.se<br/>Webb: www.coreit.se<br/>Postadress: Box 407, 891 28 Örnsköldsvik<br/>Besöksadress: Hörneborgsvägen 11, 892 50 Domsjö<br/>" + Logga + "</p>"; 
                 string forMoreInfo = "<p>Se mera information på/See more information on<br/>http://www.coreit.se/servicefonster</p>";
 
                 var message = new MailMessage();
