@@ -20,15 +20,16 @@
             <div class="col-md-6">
                <div>
                     <h3><b>Enter subject</b></h3>
-                    @Html.TextAreaFor(m => m.Subject, new { @class = "form-control TextboxSubject"})
+                    @Html.TextAreaFor(m => m.Subject, new { @class = "form-control TextboxSubject", @id="TbSubject" })
                     @Html.ValidationMessageFor(m => m.Subject, "", new { @style = "color:red" })
                </div>
 
                 <div >
                     <h3><b>Enter message</b></h3>
-                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control TextboxMessage" })
+                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control TextboxMessage", @id="TbMessage" })
                     @Html.ValidationMessageFor(m => m.Message, "", new { @style = "color:red" })
                 </div>
+                <div id="divCounter"><em><span></span></em></div>
             </div>
 
             <div class="col-xs-6 col-md-6 col-lg-6" >
@@ -62,9 +63,10 @@
         <h4><b>Notification type</b></h4>
         <div class="BorderBlack">
             <div class="checkBoxMargin">
-                    @Html.CheckBoxFor(m => m.SendSms)<b>SMS</b><br /><br />
-                    @Html.CheckBoxFor(m => m.SendMail)<b>Email</b>
-                </div>
+                @Html.CheckBoxFor(m => m.SendSms)<b>SMS</b><br/><br/>
+                @Html.CheckBoxFor(m => m.SendMail)<b>Email</b><br/><br/>
+                @Html.CheckBox("webChk")<b>Web</b>
+            </div>
             </div>
         <div class="text-danger">@ViewBag.NoNotificationTypeSelected</div>
         <div class="text-danger">@ViewBag.NoSubscribersMessage</div>
