@@ -312,7 +312,7 @@ namespace DriftService.Controllers
             {
                 return HttpNotFound();
             }
-            return View(contactViewModel);
+            return PartialView(contactViewModel);
         }
 
         // POST: Contact/Edit/5
@@ -350,7 +350,10 @@ namespace DriftService.Controllers
                     {
                         contactViewModel.SelectedServiceTypeList = SelectedServiceType.ToList();
                     }
-                    return View(contactViewModel);
+                   
+                    //return JavaScript()
+                    //return PartialView("Edit",contactViewModel);
+                    return PartialView(contactViewModel);
                 }
                 
                 if (ModelState.IsValid)

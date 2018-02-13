@@ -110,8 +110,8 @@
 
         @foreach (var item in Model.contactViewModels)
         {
-            
-        <tr class="searchRow" id="@item.ContactID" >
+
+        <tr class="searchRow"  >
             <td onclick="document.location='@(Url.Action("Details", new { id = item.ContactID }))'">
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -154,16 +154,17 @@
                 @NotificationTypeName
             </td>
             <td>
-                <button class="btn-warning btn-xs" onclick="EditRow(@item.ContactID)">Edit </button>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ContactID })
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.ContactID })*@
+                <button class="btn-xs btn-warning" onclick="editProduct(@item.ContactID)"> Edit </button>
+            
                 <div id="ContactDeleteBtn">
                     @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
-            {
+                     {
                 <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#@item.ContactID"
                         data-whatever="@item.ContactID">
                     Delete
                 </button>
-                <!-- Modal -->
+                //Modal delete 
                 <div class="modal fade" id="@item.ContactID" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog modal-sm" role="document">
                         <div class="modal-content">
@@ -181,13 +182,16 @@
                         </div>
                     </div>
                 </div>
-    }
+                     }
+                    
                 </div>
             </td>
         </tr>
 
         }
     </table>
+
+    <div id="modalWrapper"> </div>
 
 </div>
 

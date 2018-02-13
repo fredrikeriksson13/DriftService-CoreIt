@@ -127,3 +127,11 @@ footer {
 .margin-10px{
     margin:10px;
 }
+
+.modal {
+    width: 1080px;
+}
+
+#modalWrapper {
+    width: 1080px;
+}
