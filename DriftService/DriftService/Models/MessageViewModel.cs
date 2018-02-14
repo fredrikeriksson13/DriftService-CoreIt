@@ -17,6 +17,8 @@ namespace DriftService.Models
         public bool SendMail { get; set; }
         public bool SendSms { get; set; }
 
+        public int SelectedLanguage { get; set; }
+
         public int[] SelectedServiceType;
 
         public List<ServiceType> ServiceTypeList;
