@@ -19,8 +19,6 @@ namespace DriftService.Controllers
 
         public ActionResult Index(string sortOrder, string searchString, int[] SelectedServiceType)
         {
-           
-
             foreach (var i in db.Contacts)
             {
                 ContactViewModel contactViewModel = new ContactViewModel
@@ -33,7 +31,7 @@ namespace DriftService.Controllers
                     Business = i.Business,
                     RegDate = i.RegDate,
                     NotificationType = i.NotificationType,
-                    ContactServiceTypeList = (from c in db.ContactServiceTypes where c.ContactID == i.ContactID select c).ToList(), 
+                    ContactServiceTypeList = (from c in db.ContactServiceTypes where c.ContactID == i.ContactID select c).ToList(),
                 };
 
                 contactViewModelTempList.Add(contactViewModel);
@@ -55,7 +53,7 @@ namespace DriftService.Controllers
                         }
                     }
                 }
-                contactViewModelTempList = contactsWithMatchingServiceType;
+                contactViewModelTempList = contactsWithMatchingServiceType.Distinct().ToList();
             }
 
 
@@ -181,11 +179,7 @@ namespace DriftService.Controllers
                     {
                         ModelState.AddModelError("PhoneNumber", "PhoneNumber already exists.");
                     }
-                    //if (SelectedServiceType == null)
-                    //{
-                    //    ViewBag.ErrorMessageServiceType = "Atlest one servicetype must be selected.";
-                    //}
-                    if(contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false)
+                    if (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false)
                     {
                         ViewBag.ErrorMessageNotificationType = "Atlest one Notificationtype must be selected.";
                     }
