@@ -1,4 +1,5 @@
-﻿
+﻿//ToDO: Verifiering på email adress
+// Telefon nummer numeriskt
 
 
 function editProduct(contactID) {
@@ -13,22 +14,72 @@ function editProduct(contactID) {
 }
 
 
-$("#FirstName").keyup(function () {
-    var txtFirs = (this).val().lenght;
-    if (txtFirs == 0) {
-        $("#btnSubmit").attr("disabled", true);
+
+
+//function isValidEmailAddress(emailAddress) {
+//    var pattern = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+//  return pattern.test(emailAddress.val())
+//};
+
+$("#SelectedSms, #SelectedEmail").mouseleave(function () {
+
+    if (!$("#SelectedSms").is(':checked') && !$("#SelectedEmail").is(':checked')) {
+        $("#notificationErrorMessage span").text("Atlest one Notificationtype must be selected.");
     }
-});  
+    else {
+        $("#notificationErrorMessage span").text("");
+    }
 
-function Validation(){
+    if (($("#FirstName").val() == "") || ($("#LastName").val() == "") || ($("#Business").val() == "") ||  (!$("#SelectedSms").is(':checked') && !$("#SelectedEmail").is(':checked'))) {
+        $("#btnSubmit").attr("disabled", true)
+    }
+    else {
+        $("#btnSubmit").attr("disabled", false)
+    }
+});
+
+$("#SelectedSms, #SelectedEmail, #FirstName, #LastName, #Business, #Email").keyup(function () {
+    
+    
+
+        if (($("#FirstName").val() == "")) {
+            $("#FirstNameErrorMessage span").text("Please enter Firtst name.");
+        }
+        else {
+            $("#FirstNameErrorMessage span").text("");
+        }
+        if (($("#LastName").val() == "")) {
+            $("#LastNameErrorMessage span").text("Please enter Last name.");
+        }
+        else {
+            $("#LastNameErrorMessage span").text("");
+        }
+        if (($("#Business").val() == "")) {
+            $("#BusinessErrorMessage span").text("Please enter company name.");
+        }
+        else {
+            $("#BusinessErrorMessage span").text("");
+        }
+       
+         if (($("#FirstName").val() == "") || ($("#LastName").val() == "") || ($("#Business").val() == "") || !$("#SelectedSms").is(':checked') && !$("#SelectedEmail").is(':checked')) {
+            $("#btnSubmit").attr("disabled", true)
+    }
+    else {
+        $("#btnSubmit").attr("disabled", false)
+    }
+
    
-};
+});
 
 
 
 
 
-
+//function isValidPhoneNumber(PhoneNumber) {
+//    var pattern = new RegExp('^/+[0-9]*$');
+//    return pattern.test(PhoneNumber);
+//};
 
 //function EditRow(Id) {
 

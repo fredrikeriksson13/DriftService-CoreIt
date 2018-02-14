@@ -23,39 +23,43 @@
                         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
                         <div class="col-md-10 col-lg-8">
                             @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" , @id = "FirstName"} })
-                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            @*@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })*@
+                            <div class="text-danger" id="FirstNameErrorMessage"><span></span></div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
                         <div class="col-md-10 col-lg-8">
-                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @id = "LastName" } })
+                            @*@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })*@
+                            <div class="text-danger" id="LastNameErrorMessage"><span></span></div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Business, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
                         <div class="col-md-10 col-lg-8">
-                            @Html.EditorFor(model => model.Business, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Business, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Business, new { htmlAttributes = new { @class = "form-control" , @id = "Business"} })
+                            @*@Html.ValidationMessageFor(model => model.Business, "", new { @class = "text-danger" })*@
+                            <div class="text-danger" id="BusinessErrorMessage"><span></span></div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
                         <div class="col-md-10 col-lg-8">
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" , @id = "Email"} })
+                            @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
+                            <div class="text-danger" id="EmailErrorMessage"><span></span></div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
                         <div class="col-md-10 col-lg-8">
-                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })<br />
+                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" , @id = "PhoneNumber"} })
+                            <div class="text-danger" id="PhoneNumberErrorMessage"><span></span></div><br />
                         </div>
                     </div>
 
@@ -109,11 +113,12 @@
                         <h4><b>Notification type</b></h4>
                         <div class="BorderBlack">
                             <div class="checkBoxMargin">
-                                @Html.CheckBoxFor(m => m.SelectedSms)<b>SMS</b><br /><br />
-                                @Html.CheckBoxFor(m => m.SelectedEmail)<b>Email</b>
+                                @Html.CheckBoxFor(m => m.SelectedSms, new { htmlAttributes = new { @id = "SelectedSms" } })<b>SMS</b><br /><br />
+                                @Html.CheckBoxFor(m => m.SelectedEmail, new { htmlAttributes = new { @id = "SelectedEmail" } })<b>Email</b>
                             </div>
                         </div>
-                        <div class="text-danger">
+                        <div id="notificationErrorMessage" class="text-danger">
+                            <span></span>
                             @ViewBag.ErrorMessageNotificationType
                         </div>
                     </div>
