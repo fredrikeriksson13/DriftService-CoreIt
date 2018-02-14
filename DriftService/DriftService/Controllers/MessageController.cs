@@ -42,7 +42,10 @@ namespace DriftService.Controllers
             {
                 if ((ModelState.IsValid) && (SelectedServiceType != null) && (model.SendMail == true || model.SendSms == true || webChk == true))
                 {
-                    foreach (var i in db.Contacts.ToList()) //Sort contacts after choosen servicetype
+                    List<Contact> ListOfContacts = db.Contacts.ToList();
+                    ListOfContacts.RemoveAll(x => x.Language != model.SelectedLanguage);
+                     
+                    foreach (var i in ListOfContacts) //Sort contacts after choosen servicetype
                     {
                         foreach (var x in i.ContactServiceType)
                         {
@@ -71,11 +74,11 @@ namespace DriftService.Controllers
 
                             if (model.SendMail && (ListOfContactsForMail.Count != 0))
                             {
-                                await SendEmail(model);
+                                //await SendEmail(model);
                             }
                             if (model.SendSms && (ListOfContactsForSMS.Count != 0))
                             {
-                                await SendSms(model);
+                                //await SendSms(model);
                             }
                         }
                         SaveMessageToLogg(model, SelectedServiceType, webChk);

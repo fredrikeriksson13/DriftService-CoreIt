@@ -21,6 +21,7 @@ namespace DriftService.Models
         [Display(Name = "Notification type")]
         public int NotificationType { get; set; }
         public DateTime RegDate { get; set; }
+        public int Language { get; set; }
 
         public virtual ICollection<ContactServiceType> ContactServiceType { get; set; }
     }

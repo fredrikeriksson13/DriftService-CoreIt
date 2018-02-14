@@ -50,41 +50,49 @@
                             <div class="ServiceTypeCheckBox">
                                 <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="@item.ServiceTypeID" checked="@isChecked" />
                             </div>
-                        </div>
-                      
+                        </div>                      
                     }
                     <div class="text-danger">@ViewBag.NoServiceTypSelected</div>
                 </div>
             </div>
         </div>
 
- <div class="row">
-    <div class="col-xs-2 col-md-2 col-lg-2">
-        <h4><b>Notification type</b></h4>
-        <div class="BorderBlack">
-            <div class="checkBoxMargin">
-                @Html.CheckBoxFor(m => m.SendSms)<b>SMS</b><br/><br/>
-                @Html.CheckBoxFor(m => m.SendMail)<b>Email</b><br/><br/>
-                @Html.CheckBox("webChk")<b>Web</b>
+    <div class="row">
+        <div class="col-xs-2 col-md-2 col-lg-2">
+            <h4><b>Notification type</b></h4>
+            <div class="BorderBlack">
+                <div class="checkBoxMargin">
+                    @Html.CheckBoxFor(m => m.SendSms)<b>SMS</b><br/><br/>
+                    @Html.CheckBoxFor(m => m.SendMail)<b>Email</b><br/><br/>
+                    @Html.CheckBox("webChk")<b>Web</b>
+                </div>
             </div>
+            <div class="text-danger">@ViewBag.NoNotificationTypeSelected</div>
+            <div class="text-danger">@ViewBag.NoSubscribersMessage</div>
+        </div>
+        <div class="Float-Left">
+            <h4><b>Language</b></h4>
+            <div class="BorderBlack">
+                <div class="checkBoxMargin" style="vertical-align:middle">
+                    @Html.RadioButtonFor(m => m.SelectedLanguage, "1", new { @checked = true }) <span>Swedish</span>
+                    @Html.RadioButtonFor(m => m.SelectedLanguage, "2") <span>English</span>
+                    @Html.RadioButtonFor(m => m.SelectedLanguage, "3") <span>German</span>
+                </div>
             </div>
-        <div class="text-danger">@ViewBag.NoNotificationTypeSelected</div>
-        <div class="text-danger">@ViewBag.NoSubscribersMessage</div>
-         </div>
-   </div>
+        </div>
+    </div>
         <br/>
         <div style="color:green"><b>@ViewBag.ConfirmationMessage</b></div>
         <div style="color:red">@ViewBag.Error</div>       
 
-       <div class="row">
-         <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
-               <input class="btn-default" type="submit" value="Send" id="BtnSendMessage" />
-                @Html.ActionLink("Back to List", "Index")
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
+                   <input class="btn-default" type="submit" value="Send" id="BtnSendMessage" />
+                    @Html.ActionLink("Back to List", "Index")
             </div>
         </div>
     </div>
 }
-
 </div>
 
 

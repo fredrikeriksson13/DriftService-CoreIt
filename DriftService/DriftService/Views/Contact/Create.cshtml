@@ -108,6 +108,16 @@
                         @ViewBag.ErrorMessageNotificationType
                     </div>
                 </div>
+                <div class="Float-Left">
+                    <h4><b>Language</b></h4>
+                    <div class="BorderBlack">
+                        <div class="checkBoxMargin" style="vertical-align:middle">
+                            @Html.RadioButtonFor(m => m.SelectedLanguage, "1", new { @checked = true }) <span>Swedish</span>
+                            @Html.RadioButtonFor(m => m.SelectedLanguage, "2") <span>English</span>
+                            @Html.RadioButtonFor(m => m.SelectedLanguage, "3") <span>German</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="row">

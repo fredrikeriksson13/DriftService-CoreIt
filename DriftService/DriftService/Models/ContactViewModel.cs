@@ -38,6 +38,7 @@ namespace DriftService.Models
         public int NotificationType { get; set; }
         [Display(Name = "Registered")]
         public DateTime RegDate { get; set; }
+        public int Language { get; set; }
         public List<ServiceType> ServiceTypeList { get; set; }
 
         public List<ContactServiceType> ContactServiceTypeList { get; set; }
@@ -46,6 +47,8 @@ namespace DriftService.Models
         public bool SelectedSms { get; set; }
         public bool SelectedEmail { get; set; }
         public List<int> SelectedServiceTypeList { get; set; }
-       
+
+        public int SelectedLanguage { get; set; }
+
     }
 }
