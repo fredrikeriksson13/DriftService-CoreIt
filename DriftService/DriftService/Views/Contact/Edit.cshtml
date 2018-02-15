@@ -2,137 +2,161 @@
 
 
 
-@using (Ajax.BeginForm("Edit", "Contact", new AjaxOptions {  UpdateTargetId = "modalWrapper", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess="test"  }))
+@*@using (Ajax.BeginForm("Edit", "Contact", new AjaxOptions {  UpdateTargetId = "modalWrapper", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess="test"  }))
+{*@
+@using (@Html.BeginForm("Edit", "Contact", FormMethod.Post))
 {
 <div class="modal fade" id="editModal" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog " role="document">
-        <div class="modal-content">
+    <div id="edit-modal-dialog" class="modal-dialog " role="document">
+        <div id="edit-modal-content" class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Edit</h4>
             </div>
             <div class="modal-body">
 
-        @Html.AntiForgeryToken()
-                <div class="form-horizontal">
+                <div class="container">
 
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.ContactID)
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+                           <br />
+                            <br />
+                            @Html.AntiForgeryToken()
+                            <div class="form-horizontal">
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
-                        <div class="col-md-10 col-lg-8">
-                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" , @id = "FirstName"} })
-                            @*@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })*@
-                            <div class="text-danger" id="FirstNameErrorMessage"><span></span></div>
-                        </div>
-                    </div>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.ContactID)
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
-                        <div class="col-md-10 col-lg-8">
-                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @id = "LastName" } })
-                            @*@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })*@
-                            <div class="text-danger" id="LastNameErrorMessage"><span></span></div>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
+                                    <div class="col-md-10 col-lg-8">
+                                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @id = "FirstName" } })
+                                        @*@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })*@
+                                        <div class="text-danger" id="FirstNameErrorMessage"><span></span></div>
+                                    </div>
+                                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Business, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
-                        <div class="col-md-10 col-lg-8">
-                            @Html.EditorFor(model => model.Business, new { htmlAttributes = new { @class = "form-control" , @id = "Business"} })
-                            @*@Html.ValidationMessageFor(model => model.Business, "", new { @class = "text-danger" })*@
-                            <div class="text-danger" id="BusinessErrorMessage"><span></span></div>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
+                                    <div class="col-md-10 col-lg-8">
+                                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @id = "LastName" } })
+                                        @*@Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })*@
+                                        <div class="text-danger" id="LastNameErrorMessage"><span></span></div>
+                                    </div>
+                                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
-                        <div class="col-md-10 col-lg-8">
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" , @id = "Email"} })
-                            @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
-                            <div class="text-danger" id="EmailErrorMessage"><span></span></div>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Business, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
+                                    <div class="col-md-10 col-lg-8">
+                                        @Html.EditorFor(model => model.Business, new { htmlAttributes = new { @class = "form-control", @id = "Business" } })
+                                        @*@Html.ValidationMessageFor(model => model.Business, "", new { @class = "text-danger" })*@
+                                        <div class="text-danger" id="BusinessErrorMessage"><span></span></div>
+                                    </div>
+                                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
-                        <div class="col-md-10 col-lg-8">
-                            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" , @id = "PhoneNumber"} })
-                            <div class="text-danger" id="PhoneNumberErrorMessage"><span></span></div><br />
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
+                                    <div class="col-md-10 col-lg-8">
+                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @id = "Email" } })
+                                        @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
+                                        <div class="text-danger" id="EmailErrorMessage"><span></span></div>
+                                    </div>
+                                </div>
 
-                    <div class="col-xs-4 col-md-4 col-lg-4">
-                        @{
-                            bool MatchingID = false;
-                        }
-                        <h4><b>Service type</b></h4>
-
-                        @foreach (var item in Model.ServiceTypeList)
-                        {
-                            if (Model.SelectedServiceTypeList != null)
-                            {
-                                if (Model.SelectedServiceTypeList.Any(x => x == item.ServiceTypeID))
-                                {
-                                    MatchingID = true;
-                                }
-                                else
-                                {
-                                    MatchingID = false;
-                                }
-                            }
-                            if (Model.ContactServiceTypeList != null)
-                            {
-                                if (Model.ContactServiceTypeList.Any(x => x.ServiceTypeID == item.ServiceTypeID))
-                                {
-                                    MatchingID = true;
-                                }
-                                else
-                                {
-                                    MatchingID = false;
-                                }
-                            }
-
-                            <div class="ServiceTypeBlock">
-                                <label for="@item.Description">@item.Description</label>
-                                <div class="ServiceTypeCheckBox">
-                                    <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="@item.ServiceTypeID" checked=@MatchingID />
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2 col-lg-4" })
+                                    <div class="col-md-10 col-lg-8">
+                                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @id = "PhoneNumber" } })
+                                        <div class="text-danger" id="PhoneNumberErrorMessage"><span></span></div><br />
+                                    </div>
                                 </div>
                             </div>
-                        }
-
-                        <div class="text-danger">
-                            @ViewBag.ErrorMessageServiceType
                         </div>
-                    </div>
-                </div>
+                      
+                        <div class="col-md-6 col-lg-6">
+                            @{
+                                bool MatchingID = false;
+                            }
+                            <h5><b>Service type</b></h5>
 
-                <div class="row">
-                    <div class="col-xs-2 col-md-2 col-lg-offset-2">
-                        <h4><b>Notification type</b></h4>
-                        <div class="BorderBlack">
-                            <div class="checkBoxMargin">
-                                @Html.CheckBoxFor(m => m.SelectedSms, new { htmlAttributes = new { @id = "SelectedSms" } })<b>SMS</b><br /><br />
-                                @Html.CheckBoxFor(m => m.SelectedEmail, new { htmlAttributes = new { @id = "SelectedEmail" } })<b>Email</b>
+                            @foreach (var item in Model.ServiceTypeList)
+                            {
+                                if (Model.SelectedServiceTypeList != null)
+                                {
+                                    if (Model.SelectedServiceTypeList.Any(x => x == item.ServiceTypeID))
+                                    {
+                                        MatchingID = true;
+                                    }
+                                    else
+                                    {
+                                        MatchingID = false;
+                                    }
+                                }
+                                if (Model.ContactServiceTypeList != null)
+                                {
+                                    if (Model.ContactServiceTypeList.Any(x => x.ServiceTypeID == item.ServiceTypeID))
+                                    {
+                                        MatchingID = true;
+                                    }
+                                    else
+                                    {
+                                        MatchingID = false;
+                                    }
+                                }
+
+                                <div class="ServiceTypeBlock">
+                                    <div class="text-aligin-center">
+                                        <p for="@item.Description">@item.Description</p>
+                                    </div>
+                                   
+                                    <div class="ServiceTypeCheckBox">
+                                        <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="@item.ServiceTypeID" checked=@MatchingID />
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="text-danger">
+                                @ViewBag.ErrorMessageServiceType
                             </div>
                         </div>
-                        <div id="notificationErrorMessage" class="text-danger">
-                            <span></span>
-                            @ViewBag.ErrorMessageNotificationType
                         </div>
+
+                    <div class="row">
+                        <div class="col-xs-2 col-md-2 col-lg-offset-2">
+                            <h5><b>Notification type</b></h5>
+                            <div class="BorderBlack">
+                                <div class="checkBoxMargin">
+                                    <div class="row text-aligin-left margin-10px">
+                                        @Html.CheckBoxFor(m => m.SelectedSms, new { htmlAttributes = new { @id = "SelectedSms" } })SMS
+                                    </div>
+                                    <div class="row text-aligin-left margin-10px">
+                                        @Html.CheckBoxFor(m => m.SelectedEmail, new { htmlAttributes = new { @id = "SelectedEmail" } })Email
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="notificationErrorMessage" class="text-danger">
+                                <span></span>
+                                @ViewBag.ErrorMessageNotificationType
+                            </div>
+                        </div>
+                       
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right">
+                            <br />
+                            <input type="submit" value="Edit" class="btn btn-danger" id="btnSubmit" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
                     </div>
                 </div>
 
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <input type="submit" value="Edit" class="btn btn-danger" id="btnSubmit" />
-            </div>
-  
         </div>
-        </div>
+     
 
 }
 <script src="~/Scripts/EditRow.js"></script>
