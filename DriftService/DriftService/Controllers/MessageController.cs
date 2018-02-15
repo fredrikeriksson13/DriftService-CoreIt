@@ -56,7 +56,7 @@ namespace DriftService.Controllers
                         }
                     }
 
-                    if (ListToSend.Count != 0 || webChk != false)
+                    if (ListToSend.Count != 0 || webChk == true)
                     {
                         if (ListToSend.Count != 0)
                         {
