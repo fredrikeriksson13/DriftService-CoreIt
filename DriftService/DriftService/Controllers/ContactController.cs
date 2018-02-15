@@ -98,7 +98,7 @@ namespace DriftService.Controllers
             contactViewModelList.contactViewModels = contactViewModelTempList;
             contactViewModelList.ServiceTypes = db.ServiceTypes.ToList();
             if(SelectedServiceType != null)
-            contactViewModelList.SelectedServiceTypeList = SelectedServiceType.ToList();
+                contactViewModelList.SelectedServiceTypeList = SelectedServiceType.ToList();
             
 
             if (contactViewModelList == null)

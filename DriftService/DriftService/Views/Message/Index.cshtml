@@ -45,7 +45,7 @@
                             }
                         }
                         <div class="ServiceTypeBlock">
-                            <label for="@item.Description">@item.Description</label>
+                            <center><label for="@item.Description">@item.Description</label></center>
                             <div class="ServiceTypeCheckBox">
                                 <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="@item.ServiceTypeID" checked="@isChecked" />
                             </div>
@@ -59,10 +59,14 @@
         <div class="col-xs-2 col-md-2 col-lg-2">
             <h4><b>Notification type</b></h4>
             <div class="BorderBlack">
-                <div class="checkBoxMargin">
-                    @Html.CheckBoxFor(m => m.SendSms)<b>SMS</b><br/><br/>
-                    @Html.CheckBoxFor(m => m.SendMail)<b>Email</b><br/><br/>
-                    @Html.CheckBox("webChk")<b>Web</b>
+                <div class="row text-aligin-left margin-10px">
+                    @Html.CheckBoxFor(m => m.SendSms)SMS
+                </div>
+                <div class="row text-aligin-left margin-10px">
+                    @Html.CheckBoxFor(m => m.SendMail)Email
+                </div>
+                <div class="row text-aligin-left margin-10px">
+                    @Html.CheckBox("webChk")Web
                 </div>
             </div>
             <div class="text-danger">@ViewBag.NoNotificationTypeSelected</div>
@@ -72,7 +76,6 @@
         <div class="Float-Left">
             <h4><b>Language</b></h4>
             <div class="BorderBlack">
-                <div class="checkBoxMargin" >
                     <div class="row text-aligin-left margin-10px">
                         @Html.RadioButtonFor(m => m.SelectedLanguage, "1", new { @checked = true }) <span>Swedish</span>
                     </div>
@@ -82,7 +85,6 @@
                     <div class="row text-aligin-left margin-10px">
                         @Html.RadioButtonFor(m => m.SelectedLanguage, "3") <span>German</span>
                     </div>
-                </div>
             </div>
         </div>
     </div>
