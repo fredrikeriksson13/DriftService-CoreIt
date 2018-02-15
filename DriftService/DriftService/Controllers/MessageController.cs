@@ -84,6 +84,7 @@ namespace DriftService.Controllers
                         SaveMessageToLogg(model, SelectedServiceType, webChk);
                         ViewBag.ConfirmationMessage = "Your message have been send/published";
                         ModelState.Clear();
+                        messageViewModel.Subject = "Driftsinformation - CoreIT";
                         return View(messageViewModel);
                     }
                     ViewBag.NoSubscribersMessage = "There are no contacts subscribed for your selected notifacation profile";
@@ -106,6 +107,8 @@ namespace DriftService.Controllers
                 Console.WriteLine(ex.ToString());
                 ViewBag.Error = "Unable to send notification. Please try again, and if the problem persists, contact your system administrator.";
                 messageViewModel.SelectedServiceType = SelectedServiceType;
+                messageViewModel.Subject = model.Subject;
+                messageViewModel.Message = model.Message;
                 return View(messageViewModel);
             }
         }
