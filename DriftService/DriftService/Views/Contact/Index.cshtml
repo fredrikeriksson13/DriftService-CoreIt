@@ -16,65 +16,127 @@
 
 @{bool MatchingID = true; }
 @{bool Empty = true; }
-<div class="form-horizontal">
-    @using (Html.BeginForm())
-    {
 
-        <div class="form-group col-sm-4 col-md-4 ">
-            @Html.TextBox("SearchString", null, new { placeholder = " Enter name..." })
-            <button type="submit" value="Search" class=" glyphicon glyphicon-search btn-sm btn-default"></button>
+<div class="container">
+
+    <div class="row">
+        <div class="col-lg-12 text-aligin-center ">
+            <h4>
+                Find contact by entering firstname, lastname or company name in textbox.
+                Or filter contacts by selected service type.
+            </h4>
+            <p>Use the search button for both filter alternatives.</p>
         </div>
+        <hr />
+    </div>
+    <div class="row">
 
-
-        if (Model.SelectedServiceTypeList != null)
+        @using (Html.BeginForm())
         {
+            @*<div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                            Service Types
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                        @if (Model.SelectedServiceTypeList != null)
+                         {
 
-            if (Model.SelectedServiceTypeList.Any(x => x == 0))
-            {
-                Empty = true;
-            }
-            else
-            {
-                Empty = false;
-            }
+                             if (Model.SelectedServiceTypeList.Any(x => x == 0))
+                             {
+                                 Empty = true;
+                             }
+                             else
+                             {
+                                 Empty = false;
+                             }
 
-        }
-        <div class="Float-Left margin-10px">
-            <div class="Vertical-Aligin-Center">
-                <input type="checkbox" class="checkbox" name="SelectedServiceType" value="0" checked="@Empty" />
-            </div>
-            <div class="Vertical-Aligin-Center">
-                <label for="EmptyChk">Empty</label>
-            </div>
-        </div>
+                         }
+                         <li><input type="checkbox" class="checkbox" name="SelectedServiceType" value="0" checked="@Empty" /> <p for="EmptyChk">Empty</p></li>
+                         @foreach (var item in Model.ServiceTypes)
+                         {
+                             if (Model.SelectedServiceTypeList != null)
+                             {
 
-        foreach (var item in Model.ServiceTypes)
-        {
-            if (Model.SelectedServiceTypeList != null)
-            {
+                                 if (Model.SelectedServiceTypeList.Any(x => x == item.ServiceTypeID))
+                                 {
+                                     MatchingID = true;
+                                 }
+                                 else
+                                 {
+                                     MatchingID = false;
+                                 }
 
-                if (Model.SelectedServiceTypeList.Any(x => x == item.ServiceTypeID))
+                             }
+                            <li><input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" checked="@MatchingID" /> <p for="@item.ServiceTypeID">@item.Description</p></li>
+
+                         }
+                    </ul>
+                </div>*@
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                @if (Model.SelectedServiceTypeList != null)
                 {
-                    MatchingID = true;
-                }
-                else
-                {
-                    MatchingID = false;
+
+                    if (Model.SelectedServiceTypeList.Any(x => x == 0))
+                    {
+                        Empty = true;
+                    }
+                    else
+                    {
+                        Empty = false;
+                    }
+
                 }
 
-            }
-            <div class="Float-Left margin-10px">
-                <div class="Vertical-Aligin-Center">
-                    <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" checked="@MatchingID" />
+
+                <div class="ServiceTypeFilterBlock">
+                    <div class="Vertical-Aligin-Center">
+                        <input type="checkbox" class="checkbox" name="SelectedServiceType" value="0" checked="@Empty" />
+                    </div>
+                    <div class="Vertical-Aligin-Center margin-top-13">
+                        <p for="EmptyChk">Empty</p>
+                    </div>
                 </div>
-                <div class="Vertical-Aligin-Center">
-                    <label for="@item.ServiceTypeID">@item.Description</label>
+
+
+
+
+                @foreach (var item in Model.ServiceTypes)
+                {
+                    if (Model.SelectedServiceTypeList != null)
+                    {
+
+                        if (Model.SelectedServiceTypeList.Any(x => x == item.ServiceTypeID))
+                        {
+                            MatchingID = true;
+                        }
+                        else
+                        {
+                            MatchingID = false;
+                        }
+
+                    }
+                    <div class="ServiceTypeFilterBlock ">
+                        <div class="Vertical-Aligin-Center">
+                            <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" checked="@MatchingID" />
+                        </div>
+                        <div class="Vertical-Aligin-Center margin-top-13">
+                            <p for="@item.ServiceTypeID">@item.Description</p>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 margin-10px text-aligin-right ">
+                    @Html.TextBox("SearchString", null, new { placeholder = " Search..." })
+                    <button type="submit" value="Search" class=" glyphicon glyphicon-search btn-sm btn-default"></button>
                 </div>
             </div>
         }
-    }
+    </div>
 </div>
-
 
 <div>
     <table class="table" id="ContactTable">
