@@ -69,7 +69,7 @@ namespace DriftService.Controllers
 
             ViewBag.FirstNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_FirstName" : "";
             ViewBag.LastNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Contacts_LastName" : "";
-            ViewBag.CompanyNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Company_LastName" : "";
+            ViewBag.CompanyNameSortParm = string.IsNullOrEmpty(sortOrder) ? "Company_Name" : "";
             ViewBag.RegisteredSortParm = string.IsNullOrEmpty(sortOrder) ? "Register_Date" : "";
 
             if (sortOrder != null)
@@ -82,7 +82,7 @@ namespace DriftService.Controllers
                     case "Contacts_LastName":
                         contactViewModelTempList = (from x in contactViewModelTempList orderby x.LastName select x).ToList();
                         break;
-                    case "Company_LastName":
+                    case "Company_Name":
                         contactViewModelTempList = (from x in contactViewModelTempList orderby x.Business select x).ToList();
                         break;
                     case "Register_Date":
