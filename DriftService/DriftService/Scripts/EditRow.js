@@ -13,8 +13,10 @@ function editProduct(contactID) {
     });
 }
 
-
-
+function isPhoneNumberNumeric(_phoneNumber) {
+    var phoneNumberNumeric = new RegExp('^\\+[0-9]+$');
+    return phoneNumberNumeric.test(_phoneNumber);
+};
 
 //function isValidEmailAddress(emailAddress) {
 //    var pattern = new RegExp(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -31,7 +33,7 @@ $("#SelectedSms, #SelectedEmail").mouseleave(function () {
         $("#notificationErrorMessage span").text("");
     }
 
-    if (($("#FirstName").val() == "") || ($("#LastName").val() == "") || ($("#Business").val() == "") ||  (!$("#SelectedSms").is(':checked') && !$("#SelectedEmail").is(':checked'))) {
+    if (($("#FirstName").val() == "") || ($("#LastName").val() == "") || ($("#Business").val() == "") || (!$("#SelectedSms").is(':checked') && !$("#SelectedEmail").is(':checked')) || ($("#Email").val() == "")) {
         $("#btnSubmit").attr("disabled", true)
     }
     else {
@@ -39,8 +41,8 @@ $("#SelectedSms, #SelectedEmail").mouseleave(function () {
     }
 });
 
-$("#SelectedSms, #SelectedEmail, #FirstName, #LastName, #Business, #Email").keyup(function () {
-    
+$("#SelectedSms, #SelectedEmail, #FirstName, #LastName, #Business, #Email, #PhoneNumber").keyup(function () {
+
     
 
         if (($("#FirstName").val() == "")) {
@@ -61,8 +63,23 @@ $("#SelectedSms, #SelectedEmail, #FirstName, #LastName, #Business, #Email").keyu
         else {
             $("#BusinessErrorMessage span").text("");
         }
+
+        if (($("#Email").val() == "")) {
+            $("#EmailErrorMessage span").text("Please enter email adress.");
+        }
+        else {
+            $("#EmailErrorMessage span").text("");
+        }
+
+        if (isPhoneNumberNumeric($("#PhoneNumber").val()) == false) {
+            $("#PhoneNumberErrorMessage span").text("Phone number must start with dialling code (Ex. +46), and be numeric.");
+        }
+        else {
+            $("#PhoneNumberErrorMessage span").text("");
+        }
+        
        
-         if (($("#FirstName").val() == "") || ($("#LastName").val() == "") || ($("#Business").val() == "") || !$("#SelectedSms").is(':checked') && !$("#SelectedEmail").is(':checked')) {
+        if (($("#FirstName").val() == "") || ($("#LastName").val() == "") || ($("#Business").val() == "") || !$("#SelectedSms").is(':checked') && !$("#SelectedEmail").is(':checked') || ($("#Email").val() == "")) {
             $("#btnSubmit").attr("disabled", true)
     }
     else {

@@ -317,40 +317,40 @@ namespace DriftService.Controllers
         {
             try
             {
-                if (!ModelState.IsValid || (db.Contacts.Any(x => x.Email == contactViewModel.Email && x.ContactID != contactViewModel.ContactID)) || (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber && x.ContactID != contactViewModel.ContactID)) || (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false))
-                {
-                    contactViewModel.SelectedSms = contactViewModel.SelectedSms;
-                    contactViewModel.SelectedEmail = contactViewModel.SelectedEmail;
-                    contactViewModel.ServiceTypeList = db.ServiceTypes.ToList();
+                //    if (!ModelState.IsValid || (db.Contacts.Any(x => x.Email == contactViewModel.Email && x.ContactID != contactViewModel.ContactID)) || (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber && x.ContactID != contactViewModel.ContactID)) || (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false))
+                //    {
+                //        contactViewModel.SelectedSms = contactViewModel.SelectedSms;
+                //        contactViewModel.SelectedEmail = contactViewModel.SelectedEmail;
+                //        contactViewModel.ServiceTypeList = db.ServiceTypes.ToList();
 
-                    if (db.Contacts.Any(x => x.Email == contactViewModel.Email && x.ContactID != contactViewModel.ContactID))
-                    {
-                        ModelState.AddModelError("Email", "Email already exists.");
-                    }
-                    if (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber && x.ContactID != contactViewModel.ContactID))
-                    {
-                        ModelState.AddModelError("PhoneNumber", "PhoneNumber already exists.");
-                    }
-                    //if (SelectedServiceType == null)
-                    //{
-                    //    ViewBag.ErrorMessageServiceType = "Atlest one servicetype must be selected.";
-                    //}
-                    if (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false)
-                    {
-                        ViewBag.ErrorMessageNotificationType = "Atlest one Notificationtype must be selected.";
-                    }
-                    //If Something dosent validate, return error And selected values
+                //        if (db.Contacts.Any(x => x.Email == contactViewModel.Email && x.ContactID != contactViewModel.ContactID))
+                //        {
+                //            ModelState.AddModelError("Email", "Email already exists.");
+                //        }
+                //        if (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber && x.ContactID != contactViewModel.ContactID))
+                //        {
+                //            ModelState.AddModelError("PhoneNumber", "PhoneNumber already exists.");
+                //        }
+                //        //if (SelectedServiceType == null)
+                //        //{
+                //        //    ViewBag.ErrorMessageServiceType = "Atlest one servicetype must be selected.";
+                //        //}
+                //        if (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false)
+                //        {
+                //            ViewBag.ErrorMessageNotificationType = "Atlest one Notificationtype must be selected.";
+                //        }
+                //        //If Something dosent validate, return error And selected values
 
-                    if (SelectedServiceType != null)
-                    {
-                        contactViewModel.SelectedServiceTypeList = SelectedServiceType.ToList();
-                    }
-                   
-                    //return JavaScript()
-                    //return PartialView("Edit",contactViewModel);
-                    return PartialView(contactViewModel);
-                }
-                
+                //        if (SelectedServiceType != null)
+                //        {
+                //            contactViewModel.SelectedServiceTypeList = SelectedServiceType.ToList();
+                //        }
+
+                //        //return JavaScript()
+                //        //return PartialView("Edit",contactViewModel);
+                //        return PartialView(contactViewModel);
+                //    }
+
                 if (ModelState.IsValid)
                 {
                     if (contactViewModel.SelectedEmail == true)

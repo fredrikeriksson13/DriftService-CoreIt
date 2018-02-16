@@ -160,10 +160,13 @@
                 <div id="ContactDeleteBtn">
                     @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
                      {
-                <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#@item.ContactID"
-                        data-whatever="@item.ContactID">
-                    Delete
-                </button>
+                      
+                      <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#@item.ContactID"
+                              data-whatever="@item.ContactID">
+                              Delete
+                      </button>
+                       
+               
                 //Modal delete 
                 <div class="modal fade" id="@item.ContactID" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog modal-sm" role="document">
@@ -176,8 +179,8 @@
                                 Are you sure you want to delete: <span><b>@item.FirstName  @item.LastName</b> ?</span>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <input type="submit" value="Delete" class="btn btn-danger" />
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
