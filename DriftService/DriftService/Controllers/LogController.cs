@@ -61,11 +61,6 @@ namespace DriftService.Views.Contact
             return View(l);
         }
 
-        public ActionResult About()
-        {
-            return View();
-        }
-
         public void FindAndParserSelectedServiceType()
         {
             string StringForParsing = "";
