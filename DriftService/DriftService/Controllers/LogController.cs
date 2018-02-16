@@ -12,7 +12,6 @@ namespace DriftService.Views.Contact
     {
        private DriftContext db = new DriftContext();
        private List<Log> ListOfLogs = new List<Log>();
-       private string StringForParsing = "";
 
         // GET: Log
         public ActionResult Index(string searchString, string searchDate)
@@ -20,7 +19,6 @@ namespace DriftService.Views.Contact
             FindAndParserSelectedServiceType();
 
             List<Log> ListAfterSearch = new List<Log>();
-            List<Log> ListForRemoveBasisDate = new List<Log>();
 
             if (!string.IsNullOrEmpty(searchString) || (!string.IsNullOrEmpty(searchDate)))
             {
@@ -40,18 +38,7 @@ namespace DriftService.Views.Contact
                 {
                     DateTime SelectedDate = Convert.ToDateTime(searchDate).AddDays(1);
                     DateTime TwoWeeksBefore = SelectedDate.AddDays(-14);
-                    foreach (var i in ListOfLogs)
-                    {
-                        if (i.Date > SelectedDate || i.Date < TwoWeeksBefore)
-                        {
-                            ListForRemoveBasisDate.Add(i);
-                        }
-                    }
-
-                    foreach (var i in ListForRemoveBasisDate)
-                    {
-                        ListOfLogs.Remove(i);
-                    }
+                    ListOfLogs.RemoveAll(x => x.Date > SelectedDate || x.Date < TwoWeeksBefore);
 
                     ViewBag.SelectedDate = searchDate;
                 }
@@ -74,37 +61,29 @@ namespace DriftService.Views.Contact
             return View(l);
         }
 
-        public ActionResult About()
+        public void FindAndParserSelectedServiceType()
         {
-            return View();
-        }
+            string StringForParsing = "";
+            List<Log> LogList = db.Logs.ToList();
 
-            public void FindAndParserSelectedServiceType()
-        {
-            foreach (var i in db.Logs.ToList())
+            foreach (var i in LogList)
             {
                 string[] SplitedString = i.SelectedServiceType.Split(':');
                 foreach (var ii in SplitedString)
                 {
                     var s = db.ServiceTypes.ToList().Find(x => x.ServiceTypeID.ToString() == ii);
-                    if(s != null)
+                    if (s != null)
                     {
                         if (string.IsNullOrWhiteSpace(StringForParsing))
-                        {
                             StringForParsing = s.Description;
-                        }
                         else
-                        {
                             StringForParsing = StringForParsing + ", " + s.Description;
-                        }
                     }
-                    
                 }
                 i.SelectedServiceType = StringForParsing;
                 ListOfLogs.Add(i);
                 StringForParsing = "";
             }
-
         }
     }
 }

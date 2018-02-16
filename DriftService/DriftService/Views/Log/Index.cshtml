@@ -16,10 +16,11 @@
  <form class="form-horizontal">
           @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
           {
-            <div class="form-group col-sm-6">
-                @Html.TextBox("SearchString", null, new { placeholder = " Enter name...", id = "searchString" })
+            <div class="form-group col-sm-11">
+                @Html.TextBox("SearchString", null, new { placeholder = " Search word...", id = "searchString" })
                 @Html.TextBox("SearchDate", null, new { placeholder = ViewBag.SelectedDate, id = "datepicker" })
                 <button type="submit" value="Search" id="SearchBtn" class="glyphicon glyphicon-search btn-sm btn-default"></button>
+                <span>Search on a word or/and date, date shows alla logs two weeks before the selected one. </span>
             </div>
           }
  </form>
@@ -31,7 +32,7 @@
         <thead>
             <tr>
                 <th class="th-td-padding th-first">
-                    @Html.DisplayNameFor(model => model.HeadLine)
+                    Subject
                 </th>
                 <th class="th-td-padding th-second">
                     @Html.DisplayNameFor(model => model.Text)

@@ -19,13 +19,13 @@
         <div class="row">
             <div class="col-md-6">
                <div>
-                    <h3><b>Enter subject</b></h3>
+                    <h4><b>Enter subject</b></h4>
                     @Html.TextAreaFor(m => m.Subject, new { @class = "form-control TextboxSubject", @id="TbSubject" })
                     @Html.ValidationMessageFor(m => m.Subject, "", new { @style = "color:red" })
                </div>
 
                 <div >
-                    <h3><b>Enter message</b></h3>
+                    <h4><b>Enter message</b></h4>
                     @Html.TextAreaFor(m => m.Message, new { @class = "form-control TextboxMessage", @id="TbMessage" })
                     @Html.ValidationMessageFor(m => m.Message, "", new { @style = "color:red" })
                 </div>
@@ -45,7 +45,7 @@
                             }
                         }
                         <div class="ServiceTypeBlock">
-                            <center><label for="@item.Description">@item.Description</label></center>
+                            <center><p for="@item.Description">@item.Description</p></center>
                             <div class="ServiceTypeCheckBox">
                                 <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="@item.ServiceTypeID" checked="@isChecked" />
                             </div>
