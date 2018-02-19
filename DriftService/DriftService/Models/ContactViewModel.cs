@@ -48,7 +48,7 @@ namespace DriftService.Models
         public bool SelectedEmail { get; set; }
         public List<int> SelectedServiceTypeList { get; set; }
 
-        public int SelectedLanguage { get; set; }
+       
 
     }
 }

@@ -133,7 +133,7 @@ footer {
 }
 
 #edit-modal-dialog {
-    max-width: 800px;
+    max-width: 850px;
     width: auto;
 }
 
@@ -162,4 +162,8 @@ footer {
 
 .Vertical-Aligin-middle{
     vertical-align:middle;
+}
+
+.margin-2px{
+    margin:2px;
 }

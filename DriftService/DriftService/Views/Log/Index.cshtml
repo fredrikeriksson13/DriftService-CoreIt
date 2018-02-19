@@ -12,15 +12,22 @@
     </div>
 </div>
 
+<div class="col-lg-12 text-aligin-center ">
+    <p>Find a specific message by entering subject/text, or by entering date. Date shows all logs sent two weeks before the selected one.</p>
+    <hr />
+</div>
+
+   
+
 
  <form class="form-horizontal">
           @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "searchForm" }))
           {
             <div class="form-group col-sm-11">
-                @Html.TextBox("SearchString", null, new { placeholder = " Search word...", id = "searchString" })
+                @Html.TextBox("SearchString", null, new { placeholder = " Search Subject/Text...", id = "searchString" })
                 @Html.TextBox("SearchDate", null, new { placeholder = ViewBag.SelectedDate, id = "datepicker" })
                 <button type="submit" value="Search" id="SearchBtn" class="glyphicon glyphicon-search btn-sm btn-default"></button>
-                <span>Search on a word or/and date, date shows alla logs two weeks before the selected one. </span>
+                @*<span>Search on a word or/and date, date shows alla logs two weeks before the selected one. </span>*@
             </div>
           }
  </form>
