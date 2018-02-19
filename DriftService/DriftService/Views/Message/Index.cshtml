@@ -13,68 +13,68 @@
 </div>
 
 <div style="font-family:Arial">
-@using (@Html.BeginForm(null, null, FormMethod.Post, new { id = "SendMessageForm" }))
-{
+    @using (@Html.BeginForm(null, null, FormMethod.Post, new { id = "SendMessageForm" }))
+    {
         <div class="row">
             <div class="col-md-6">
-               <div>
+                <div>
                     <h4><b>Enter subject</b></h4>
-                    @Html.TextAreaFor(m => m.Subject, new { @class = "form-control TextboxSubject", @id="TbSubject" })
-                    @Html.ValidationMessageFor(m => m.Subject, "", new { @class="text-danger"})
-               </div>
+                    @Html.TextAreaFor(m => m.Subject, new { @class = "form-control TextboxSubject", @id = "TbSubject" })
+                    @Html.ValidationMessageFor(m => m.Subject, "", new { @class = "text-danger" })
+                </div>
 
-                <div >
+                <div>
                     <h4><b>Enter message</b></h4>
-                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control TextboxMessage", @id="TbMessage" })
+                    @Html.TextAreaFor(m => m.Message, new { @class = "form-control TextboxMessage", @id = "TbMessage" })
                     @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
                 </div>
                 <div id="divCounter"><em><span></span></em></div>
             </div>
 
-            <div class="col-xs-6 col-md-6 col-lg-6" >              
-                    <h4><b>Service type</b></h4>
-                    @foreach (var item in Model.ServiceTypeList)
+            <div class="col-xs-6 col-md-6 col-lg-6">
+                <h4><b>Service type</b></h4>
+                @foreach (var item in Model.ServiceTypeList)
+                {
+                    bool isChecked = false;
+                    if (Model.SelectedServiceType != null)
                     {
-                        bool isChecked = false;
-                        if (Model.SelectedServiceType != null)
+                        if (Model.SelectedServiceType.Any(x => x == item.ServiceTypeID))
                         {
-                            if (Model.SelectedServiceType.Any(x => x == item.ServiceTypeID))
-                            {
-                                isChecked = true;
-                            }
+                            isChecked = true;
                         }
-                        <div class="ServiceTypeBlock">
-                            <center><p for="@item.Description">@item.Description</p></center>
-                            <div class="ServiceTypeCheckBox">
-                                <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="@item.ServiceTypeID" checked="@isChecked" />
-                            </div>
-                        </div>                      
                     }
+                    <div class="ServiceTypeBlock">
+                        <center><p for="@item.Description">@item.Description</p></center>
+                        <div class="ServiceTypeCheckBox">
+                            <input type="checkbox" class="checkbox" name="SelectedServiceType" value="@item.ServiceTypeID" id="@item.ServiceTypeID" checked="@isChecked" />
+                        </div>
+                    </div>
+                }
             </div>
-            <div class="text-danger text-aligin-center">@ViewBag.NoServiceTypSelected</div>     
-        </div>
-        
-    <div class="row">
-        <div class="col-lg-2 Float-Left" >
-            <h4><b>Notification type</b></h4>
-            <div class="BorderBlack">
-                <div class="row text-aligin-left margin-10px">
-                    @Html.CheckBoxFor(m => m.SendSms)SMS
-                </div>
-                <div class="row text-aligin-left margin-10px">
-                    @Html.CheckBoxFor(m => m.SendMail)Email
-                </div>
-                <div class="row text-aligin-left margin-10px">
-                    @Html.CheckBox("webChk")Web
-                </div>
-            </div>
-            <div class="text-danger">@ViewBag.NoNotificationTypeSelected</div>
-            <div class="text-danger">@ViewBag.NoSubscribersMessage</div>
+            <div class="text-danger text-aligin-center">@ViewBag.NoServiceTypSelected</div>
         </div>
 
-        <div class="col-lg-2 Float-Left ">
-            <h4><b>Language</b></h4>
-            <div class="BorderBlack">
+        <div class="row">
+            <div class="col-lg-2 Float-Left">
+                <h4><b>Notification type</b></h4>
+                <div class="BorderBlack">
+                    <div class="row text-aligin-left margin-10px">
+                        @Html.CheckBoxFor(m => m.SendSms)SMS
+                    </div>
+                    <div class="row text-aligin-left margin-10px">
+                        @Html.CheckBoxFor(m => m.SendMail)Email
+                    </div>
+                    <div class="row text-aligin-left margin-10px">
+                        @Html.CheckBox("webChk")Web
+                    </div>
+                </div>
+                <div class="text-danger">@ViewBag.NoNotificationTypeSelected</div>
+                <div class="text-danger">@ViewBag.NoSubscribersMessage</div>
+            </div>
+
+            <div class="col-lg-2 Float-Left ">
+                <h4><b>Language</b></h4>
+                <div class="BorderBlack">
                     <div class="row text-aligin-left margin-10px">
                         @Html.RadioButtonFor(m => m.Language, "1", new { @checked = true }) <span>Swedish</span>
                     </div>
@@ -84,21 +84,20 @@
                     <div class="row text-aligin-left margin-10px">
                         @Html.RadioButtonFor(m => m.Language, "3") <span>German</span>
                     </div>
+                </div>
+            </div>
+            <br />
+            <div class="text-danger">@ViewBag.Error</div>
+
+
+        </div>
+        <div class="text-success"><b>@ViewBag.ConfirmationMessage</b></div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
+                <input class="btn btn-default" type="submit" value="Send" id="BtnSendMessage" />
             </div>
         </div>
-        <br/>
-        <div class="text-danger">@ViewBag.Error</div>       
-
-        
-    </div>
-    <div class="text-success"><b>@ViewBag.ConfirmationMessage</b></div>
-    <div class="row">
-        <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
-            <input class="btn btn-default" type="submit" value="Send" id="BtnSendMessage" />
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    </div>
-}
+    }
 </div>
 
 
