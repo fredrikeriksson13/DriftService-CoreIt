@@ -20,13 +20,13 @@
                <div>
                     <h4><b>Enter subject</b></h4>
                     @Html.TextAreaFor(m => m.Subject, new { @class = "form-control TextboxSubject", @id="TbSubject" })
-                    @Html.ValidationMessageFor(m => m.Subject, "", new { @style = "color:red" })
+                    @Html.ValidationMessageFor(m => m.Subject, "", new { @class="text-danger"})
                </div>
 
                 <div >
                     <h4><b>Enter message</b></h4>
                     @Html.TextAreaFor(m => m.Message, new { @class = "form-control TextboxMessage", @id="TbMessage" })
-                    @Html.ValidationMessageFor(m => m.Message, "", new { @style = "color:red" })
+                    @Html.ValidationMessageFor(m => m.Message, "", new { @class = "text-danger" })
                 </div>
                 <div id="divCounter"><em><span></span></em></div>
             </div>
@@ -51,7 +51,7 @@
                         </div>                      
                     }
             </div>
-            <div class="text-danger">@ViewBag.NoServiceTypSelected</div>     
+            <div class="text-danger text-aligin-center">@ViewBag.NoServiceTypSelected</div>     
         </div>
         
     <div class="row">
@@ -87,11 +87,11 @@
             </div>
         </div>
         <br/>
-        <div style="color:green"><b>@ViewBag.ConfirmationMessage</b></div>
-        <div style="color:red">@ViewBag.Error</div>       
+        <div class="text-danger">@ViewBag.Error</div>       
 
         
     </div>
+    <div class="text-success"><b>@ViewBag.ConfirmationMessage</b></div>
     <div class="row">
         <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
             <input class="btn btn-default" type="submit" value="Send" id="BtnSendMessage" />
