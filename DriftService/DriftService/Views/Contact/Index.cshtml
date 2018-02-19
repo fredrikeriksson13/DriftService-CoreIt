@@ -217,13 +217,13 @@
             </td>
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { id = item.ContactID })*@
-                <button class="btn-xs btn-warning" onclick="editProduct(@item.ContactID)"> Edit </button>
+                <button class="btn btn-xs btn-warning margin-2px" onclick="editProduct(@item.ContactID)"> Edit </button>
             
                 <div id="ContactDeleteBtn">
                     @using (Html.BeginForm("DeleteContact", "Contact", new { id = item.ContactID }))
                      {
                       
-                      <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#@item.ContactID"
+                      <button type="button" class="btn btn-danger btn-xs margin-2px" data-toggle="modal" data-target="#@item.ContactID"
                               data-whatever="@item.ContactID">
                               Delete
                       </button>

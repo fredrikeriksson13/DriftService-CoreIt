@@ -64,6 +64,29 @@
         </dd>
 
         <dt class="Margin-top-20">
+            @Html.DisplayNameFor(model => model.Language) :
+        </dt>
+
+        <dd class="Margin-top-20">
+            @switch (Model.Language)
+                {
+                   
+                    case 1:
+                    <p>Swedish</p>
+                        break;
+                    case 2:
+                    <p>English</p>
+                        break;
+                    case 3:
+                    <p>German</p>
+                        break;
+                    default:
+                        <p>-</p>
+                       break;
+                }
+        </dd>
+
+        <dt class="Margin-top-20">
             @Html.DisplayNameFor(model => model.NotificationType) :
         </dt>
 

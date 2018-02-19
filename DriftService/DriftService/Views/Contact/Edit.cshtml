@@ -122,7 +122,8 @@
                         </div>
 
                     <div class="row">
-                        <div class="col-xs-2 col-md-2 col-lg-offset-2">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-2 Float-Left">
                             <h5><b>Notification type</b></h5>
                             <div class="BorderBlack">
                                 <div class="checkBoxMargin">
@@ -137,6 +138,21 @@
                             <div id="notificationErrorMessage" class="text-danger">
                                 <span></span>
                                 @ViewBag.ErrorMessageNotificationType
+                            </div>
+                        </div>
+
+                        <div class= "col-lg-offset-1 Float-Left">
+                            <h4><b>Language</b></h4>
+                            <div class="BorderBlack">
+                                <div class="row text-aligin-left margin-10px">
+                                    @Html.RadioButtonFor(m => m.Language, "1") <span>Swedish</span>
+                                </div>
+                                <div class="row text-aligin-left margin-10px">
+                                    @Html.RadioButtonFor(m => m.Language, "2") <span>English</span>
+                                </div>
+                                <div class="row text-aligin-left margin-10px">
+                                    @Html.RadioButtonFor(m => m.Language, "3") <span>German</span>
+                                </div>
                             </div>
                         </div>
                        

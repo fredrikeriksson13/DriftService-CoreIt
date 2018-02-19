@@ -134,6 +134,7 @@ namespace DriftService.Controllers
                 LastName = contact.LastName,
                 Business = contact.Business,
                 Email = contact.Email,
+                Language = contact.Language,
                 RegDate = contact.RegDate,
                 NotificationType = contact.NotificationType,
                 PhoneNumber = contact.PhoneNumber,
@@ -242,7 +243,7 @@ namespace DriftService.Controllers
                         ContactGuid = Guid.NewGuid(),
                         RegDate = DateTime.Now,
                         ContactID = ID,
-                        Language = contactViewModel.SelectedLanguage,
+                        Language = contactViewModel.Language,
                     };
 
                     db.Contacts.Add(contact);
@@ -286,6 +287,7 @@ namespace DriftService.Controllers
                 Business = contact.Business,
                 Email = contact.Email,
                 PhoneNumber = contact.PhoneNumber,
+                Language = contact.Language,
                 ServiceTypeList = db.ServiceTypes.ToList(),
                 ContactServiceTypeList = MatchingContactServiceTypeList };
 
@@ -317,40 +319,6 @@ namespace DriftService.Controllers
         {
             try
             {
-                //    if (!ModelState.IsValid || (db.Contacts.Any(x => x.Email == contactViewModel.Email && x.ContactID != contactViewModel.ContactID)) || (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber && x.ContactID != contactViewModel.ContactID)) || (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false))
-                //    {
-                //        contactViewModel.SelectedSms = contactViewModel.SelectedSms;
-                //        contactViewModel.SelectedEmail = contactViewModel.SelectedEmail;
-                //        contactViewModel.ServiceTypeList = db.ServiceTypes.ToList();
-
-                //        if (db.Contacts.Any(x => x.Email == contactViewModel.Email && x.ContactID != contactViewModel.ContactID))
-                //        {
-                //            ModelState.AddModelError("Email", "Email already exists.");
-                //        }
-                //        if (db.Contacts.Any(x => x.PhoneNumber == contactViewModel.PhoneNumber && x.ContactID != contactViewModel.ContactID))
-                //        {
-                //            ModelState.AddModelError("PhoneNumber", "PhoneNumber already exists.");
-                //        }
-                //        //if (SelectedServiceType == null)
-                //        //{
-                //        //    ViewBag.ErrorMessageServiceType = "Atlest one servicetype must be selected.";
-                //        //}
-                //        if (contactViewModel.SelectedSms == false && contactViewModel.SelectedEmail == false)
-                //        {
-                //            ViewBag.ErrorMessageNotificationType = "Atlest one Notificationtype must be selected.";
-                //        }
-                //        //If Something dosent validate, return error And selected values
-
-                //        if (SelectedServiceType != null)
-                //        {
-                //            contactViewModel.SelectedServiceTypeList = SelectedServiceType.ToList();
-                //        }
-
-                //        //return JavaScript()
-                //        //return PartialView("Edit",contactViewModel);
-                //        return PartialView(contactViewModel);
-                //    }
-
                 if (ModelState.IsValid)
                 {
                     if (contactViewModel.SelectedEmail == true)
@@ -387,6 +355,7 @@ namespace DriftService.Controllers
                         LastName = contactViewModel.LastName,
                         Business = contactViewModel.Business,
                         Email = contactViewModel.Email,
+                        Language = contactViewModel.Language,
                         PhoneNumber = contactViewModel.PhoneNumber,
                         NotificationType = contactViewModel.NotificationType,
                     };
