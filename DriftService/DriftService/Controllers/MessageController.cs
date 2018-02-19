@@ -74,11 +74,11 @@ namespace DriftService.Controllers
 
                             if (model.SendMail && (ListOfContactsForMail.Count != 0))
                             {
-                                //await SendEmail(model);
+                                await SendEmail(model);
                             }
                             if (model.SendSms && (ListOfContactsForSMS.Count != 0))
                             {
-                                //await SendSms(model);
+                                await SendSms(model);
                             }
                         }
                         SaveMessageToLogg(model, SelectedServiceType, webChk);
