@@ -11,11 +11,10 @@
         <h2><b>Send Message</b></h2>
     </div>
 </div>
-@*test*@
+
 <div style="font-family:Arial">
 @using (@Html.BeginForm(null, null, FormMethod.Post, new { id = "SendMessageForm" }))
 {
-    <div class="container">
         <div class="row">
             <div class="col-md-6">
                <div>
@@ -56,11 +55,7 @@
         </div>
         
     <div class="row">
-<<<<<<< HEAD
-        <div class="Float-Left" style="margin-right:10px">
-=======
         <div class="col-lg-2 Float-Left" >
->>>>>>> origin/master
             <h4><b>Notification type</b></h4>
             <div class="BorderBlack">
                 <div class="row text-aligin-left margin-10px">
@@ -91,16 +86,16 @@
                     </div>
             </div>
         </div>
-    </div>
         <br/>
         <div style="color:green"><b>@ViewBag.ConfirmationMessage</b></div>
         <div style="color:red">@ViewBag.Error</div>       
 
-        <div class="row">
-            <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
-                   <input class="btn btn-default" type="submit" value="Send" id="BtnSendMessage" />
-                    @Html.ActionLink("Back to List", "Index")
-            </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-12 col-lg-12 text-aligin-right ">
+            <input class="btn btn-default" type="submit" value="Send" id="BtnSendMessage" />
+            @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
 }
