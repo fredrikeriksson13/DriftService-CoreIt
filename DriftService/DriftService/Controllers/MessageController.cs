@@ -43,7 +43,7 @@ namespace DriftService.Controllers
                 if ((ModelState.IsValid) && (SelectedServiceType != null) && (model.SendMail == true || model.SendSms == true || webChk == true))
                 {
                     List<Contact> ListOfContacts = db.Contacts.ToList();
-                    ListOfContacts.RemoveAll(x => x.Language != model.SelectedLanguage);
+                    ListOfContacts.RemoveAll(x => x.Language != model.Language);
                      
                     foreach (var i in ListOfContacts) //Sort contacts after choosen servicetype
                     {

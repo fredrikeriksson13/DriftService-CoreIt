@@ -56,7 +56,7 @@
         </div>
         
     <div class="row">
-        <div class="col-xs-2 col-md-2 col-lg-2">
+        <div class="Float-Left" style="margin-right:10px">
             <h4><b>Notification type</b></h4>
             <div class="BorderBlack">
                 <div class="row text-aligin-left margin-10px">
@@ -77,13 +77,13 @@
             <h4><b>Language</b></h4>
             <div class="BorderBlack">
                     <div class="row text-aligin-left margin-10px">
-                        @Html.RadioButtonFor(m => m.SelectedLanguage, "1", new { @checked = true }) <span>Swedish</span>
+                        @Html.RadioButtonFor(m => m.Language, "1", new { @checked = true }) <span>Swedish</span>
                     </div>
                     <div class="row text-aligin-left margin-10px">
-                        @Html.RadioButtonFor(m => m.SelectedLanguage, "2") <span>English</span>
+                        @Html.RadioButtonFor(m => m.Language, "2") <span>English</span>
                     </div>
                     <div class="row text-aligin-left margin-10px">
-                        @Html.RadioButtonFor(m => m.SelectedLanguage, "3") <span>German</span>
+                        @Html.RadioButtonFor(m => m.Language, "3") <span>German</span>
                     </div>
             </div>
         </div>
