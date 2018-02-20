@@ -117,13 +117,14 @@ namespace DriftService.Controllers
         {
             foreach (var i in ListOfContactsForMail)
             {
+                string webAddressToDriftInfo = System.Configuration.ConfigurationManager.AppSettings["WebAdressDriftInfo"];
                 string unregisterstyle = "'font-size:75%';";
                 string queryString = System.Configuration.ConfigurationManager.AppSettings["UnregisterLink"].ToString() + i.ContactGuid.ToString();
                 string unregiserLink = "<a href='" + queryString + "'>";
                 string unregister = unregiserLink + "<center><p style=" + unregisterstyle + ">Klicka här för att avregistrera</p></center></a>";
                 string Logga = @"<img src=""https://www.coreit.se/wp-content/uploads/2018/01/Corelogo.png"" alt=""CoreITLogo"" height=""30"" width=""130""/>";
                 string singnatur = "<p>Servicedesk +46 (0)660-729 99<br/>Mail:    helpit@coreit.se<br/>Webb: www.coreit.se<br/>Postadress: Box 407, 891 28 Örnsköldsvik<br/>Besöksadress: Hörneborgsvägen 11, 892 50 Domsjö<br/>" + Logga + "</p>"; 
-                string forMoreInfo = "<p>Se mera information på/See more information on<br/>http://www.coreit.se/servicefonster</p>";
+                string forMoreInfo = "<p>Se mera information på/See more information on<br/>" + webAddressToDriftInfo + "</p>";
 
                 var message = new MailMessage();
                 message.To.Add(i.Email);
